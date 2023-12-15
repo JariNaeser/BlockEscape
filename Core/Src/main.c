@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "adc.h"
 #include "dma2d.h"
 #include "dsihost.h"
 #include "i2c.h"
@@ -157,7 +158,10 @@ int main(void)
   MX_DMA2D_Init();
   MX_DSIHOST_DSI_Init();
   MX_LTDC_Init();
+  MX_ADC1_Init();
+  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
+
   //Configure the RAM chip
   BSP_SDRAM_Initialization_sequence(0xFFFF);
 

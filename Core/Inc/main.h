@@ -301,8 +301,6 @@ void Error_Handler(void);
 #define FMC_D19_GPIO_Port GPIOH
 #define RMII_MDIO_Pin GPIO_PIN_2
 #define RMII_MDIO_GPIO_Port GPIOA
-#define ARD_A0_Pin GPIO_PIN_6
-#define ARD_A0_GPIO_Port GPIOA
 #define ULPI_CLK_Pin GPIO_PIN_5
 #define ULPI_CLK_GPIO_Port GPIOA
 #define RMII_RXD1_Pin GPIO_PIN_5

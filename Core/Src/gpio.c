@@ -75,15 +75,12 @@
      PB12   ------> USB_OTG_HS_ULPI_D5
      PC0   ------> USB_OTG_HS_ULPI_STP
      PC1   ------> ETH_MDC
-     PC2   ------> ADCx_IN12
      PB2   ------> QUADSPI_CLK
      PD13   ------> QUADSPI_BK1_IO3
      PA1   ------> ETH_REF_CLK
-     PA4   ------> ADCx_IN4
      PC4   ------> ETH_RXD0
      PD11   ------> SAI2_SD_A
      PA2   ------> ETH_MDIO
-     PA6   ------> ADCx_IN6
      PA5   ------> USB_OTG_HS_ULPI_CK
      PC5   ------> ETH_RXD1
      PB10   ------> USB_OTG_HS_ULPI_D3
@@ -373,12 +370,6 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = ARD_A2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(ARD_A2_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = QSPI_CLK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -407,12 +398,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B_USER_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : PAPin PAPin */
-  GPIO_InitStruct.Pin = ARD_A1_Pin|ARD_A0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = SPDIF_TX_Pin;

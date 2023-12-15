@@ -1,0 +1,3 @@
+../Core/Src/main_user.c:39:6:freeRTOS_user_init	24	static
+../Core/Src/main_user.c:54:13:task_draw_fct	24	static
+../Core/Src/main_user.c:74:13:draw_filled_square	24	static

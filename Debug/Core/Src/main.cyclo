@@ -1,0 +1,13 @@
+../Drivers/CMSIS/Include/core_cm7.h:2229:22:SCB_EnableICache	1
+../Drivers/CMSIS/Include/core_cm7.h:2281:22:SCB_EnableDCache	3
+../Core/Src/main.c:67:6:xSystemClock_Config	4
+../Core/Src/main.c:124:5:main	1
+../Core/Src/main.c:206:6:SystemClock_Config	4
+../Core/Src/main.c:260:6:BSP_SDRAM_Initialization_sequence	1
+../Core/Src/main.c:328:13:I2Cx_Init	2
+../Core/Src/main.c:360:26:I2Cx_ReadMultiple	2
+../Core/Src/main.c:386:26:I2Cx_WriteMultiple	2
+../Core/Src/main.c:409:26:I2Cx_IsDeviceReady	1
+../Core/Src/main.c:421:13:I2Cx_Error	1
+../Core/Src/main.c:440:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:457:6:Error_Handler	1

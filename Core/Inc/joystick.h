@@ -8,6 +8,8 @@
 #ifndef INC_JOYSTICK_H_
 #define INC_JOYSTICK_H_
 
-void readJoystick(void);
+#include "direction.h"
+
+enum Direction readJoystick(void);
 
 #endif /* INC_JOYSTICK_H_ */

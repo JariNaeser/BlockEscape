@@ -1,4 +1,4 @@
-Core/Src/main_user.o: ../Core/Src/main_user.c \
+Core/Src/main_user.o: ../Core/Src/main_user.c ../Core/Inc/main_user.h \
  ../Core/Src/BSP/stm32f769i_discovery_lcd.h \
  ../Core/Src/BSP/../Components/otm8009a/otm8009a.h \
  ../Core/Src/BSP/../Components/adv7533/adv7533.h \
@@ -54,7 +54,9 @@ Core/Src/main_user.o: ../Core/Src/main_user.c \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../Core/Inc/main_user.h ../Core/Inc/joystick.h
+ ../Core/Inc/joystick.h ../Core/Inc/direction.h ../Core/Inc/direction.h \
+ ../Core/Inc/difficultyLevel.h ../Core/Inc/node.h
+../Core/Inc/main_user.h:
 ../Core/Src/BSP/stm32f769i_discovery_lcd.h:
 ../Core/Src/BSP/../Components/otm8009a/otm8009a.h:
 ../Core/Src/BSP/../Components/adv7533/adv7533.h:
@@ -110,5 +112,8 @@ Core/Src/main_user.o: ../Core/Src/main_user.c \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-../Core/Inc/main_user.h:
 ../Core/Inc/joystick.h:
+../Core/Inc/direction.h:
+../Core/Inc/direction.h:
+../Core/Inc/difficultyLevel.h:
+../Core/Inc/node.h:

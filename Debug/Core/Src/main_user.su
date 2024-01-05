@@ -3,7 +3,7 @@
 ../Core/Src/main_user.c:116:6:move_and_compute_new_grid	64	static
 ../Core/Src/main_user.c:193:6:computeInitialGrid	16	static
 ../Core/Src/main_user.c:204:5:getRandomInt	16	static
-../Core/Src/main_user.c:209:6:task_draw_fct	56	static
-../Core/Src/main_user.c:266:6:draw_filled_square	24	static
-../Core/Src/main_user.c:271:6:displayWelcomeMessage	8	static
-../Core/Src/main_user.c:281:6:displayGameEndMessage	40	static
+../Core/Src/main_user.c:209:6:task_draw_fct	48	static
+../Core/Src/main_user.c:263:6:draw_filled_square	24	static
+../Core/Src/main_user.c:268:6:displayWelcomeMessage	8	static
+../Core/Src/main_user.c:278:6:displayGameEndMessage	40	static

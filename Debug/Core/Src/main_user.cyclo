@@ -4,6 +4,6 @@
 ../Core/Src/main_user.c:193:6:computeInitialGrid	3
 ../Core/Src/main_user.c:204:5:getRandomInt	1
 ../Core/Src/main_user.c:209:6:task_draw_fct	10
-../Core/Src/main_user.c:266:6:draw_filled_square	1
-../Core/Src/main_user.c:271:6:displayWelcomeMessage	1
-../Core/Src/main_user.c:281:6:displayGameEndMessage	2
+../Core/Src/main_user.c:263:6:draw_filled_square	1
+../Core/Src/main_user.c:268:6:displayWelcomeMessage	1
+../Core/Src/main_user.c:278:6:displayGameEndMessage	2

@@ -20,8 +20,8 @@
 #define DISP_Y_SIZE	480
 #define X_AXIS_ELEMENTS DISP_X_SIZE / CUBE_SIDE_LEN
 #define Y_AXIS_ELEMENTS DISP_Y_SIZE / CUBE_SIDE_LEN
-#define MOVE_INTERVAL 500
-#define SPAWN_PERCENTAGE 4
+#define MOVE_INTERVAL 700
+#define SPAWN_PERCENTAGE 5
 #define X_AXIS_CENTER X_AXIS_ELEMENTS / 2
 #define Y_AXIS_CENTER Y_AXIS_ELEMENTS / 2
 
@@ -34,7 +34,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 float speed = 1;
-enum DifficultyLevel difficultyLevel = LOW;
+enum DifficultyLevel difficultyLevel = HIGH;
 enum Direction currentDirection;
 int score = 0;
 //struct Node* queue;
@@ -215,16 +215,13 @@ void task_draw_fct( void *pvParameters ){
 		if(gameFinished){
 			displayGameEndMessage();
 		}else{
+
+			BSP_LCD_Clear(LCD_COLOR_BLACK);
+
 			// Draw bricks
 			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
 				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-					draw_filled_square(
-							j * CUBE_SIDE_LEN,
-							i * CUBE_SIDE_LEN,
-							CUBE_SIDE_LEN,
-							CUBE_SIDE_LEN,
-							matrix[i][j] ? LCD_COLOR_WHITE : LCD_COLOR_BLACK
-					);
+					if(matrix[i][j]) draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_WHITE);
 				}
 			}
 
@@ -252,12 +249,10 @@ void task_draw_fct( void *pvParameters ){
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
 
 			// Enhance speed
-			if(difficultyLevel == LOW){
-				speed += 0.01;
-			}else if(difficultyLevel == MEDIUM){
-				speed += 0.02;
-			}else if(difficultyLevel == HIGH){
+			if(difficultyLevel == MEDIUM){
 				speed += 0.03;
+			}else if(difficultyLevel == HIGH){
+				speed += 0.045;
 			}
 		}
 	}

@@ -21,31 +21,31 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, DATA
   8 .data         0000008c  20000000  0800ef30  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          000051f8  2000008c  0800efbc  0002008c  2**2
+  9 .bss          000051fc  2000008c  0800efbc  0002008c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20005284  0800efbc  00025284  2**0
+ 10 ._user_heap_stack 00000600  20005288  0800efbc  00025288  2**0
                   ALLOC
  11 .ARM.attributes 0000002e  00000000  00000000  0002008c  2**0
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  000200ba  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00029b24  00000000  00000000  000200fd  2**0
+ 13 .debug_info   00029b2d  00000000  00000000  000200fd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000061e1  00000000  00000000  00049c21  2**0
+ 14 .debug_abbrev 000061e1  00000000  00000000  00049c2a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00002148  00000000  00000000  0004fe08  2**3
+ 15 .debug_aranges 00002148  00000000  00000000  0004fe10  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00001964  00000000  00000000  00051f50  2**0
+ 16 .debug_rnglists 00001963  00000000  00000000  00051f58  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00036597  00000000  00000000  000538b4  2**0
+ 17 .debug_macro  000365a3  00000000  00000000  000538bb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0002c620  00000000  00000000  00089e4b  2**0
+ 18 .debug_line   0002c672  00000000  00000000  00089e5e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0013523f  00000000  00000000  000b646b  2**0
+ 19 .debug_str    0013527e  00000000  00000000  000b64d0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  00009274  00000000  00000000  001eb6ac  2**2
+ 20 .debug_frame  00009274  00000000  00000000  001eb750  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000069  00000000  00000000  001f4920  2**0
+ 21 .debug_line_str 00000069  00000000  00000000  001f49c4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -6650,7 +6650,7 @@ void freeRTOS_user_init(void){
 
 	// Fill initial grid
 	computeInitialGrid();
- 8002b3e:	f000 f973 	bl	8002e28 <computeInitialGrid>
+ 8002b3e:	f000 f9a5 	bl	8002e8c <computeInitialGrid>
 
 	// Print welcome message
 	displayWelcomeMessage();
@@ -6663,11 +6663,11 @@ void freeRTOS_user_init(void){
  8002b4e:	bf00      	nop
  8002b50:	2000052c 	.word	0x2000052c
  8002b54:	200006a8 	.word	0x200006a8
- 8002b58:	200006b4 	.word	0x200006b4
- 8002b5c:	200006ac 	.word	0x200006ac
+ 8002b58:	200006b8 	.word	0x200006b8
+ 8002b5c:	200006b0 	.word	0x200006b0
  8002b60:	0800c1e4 	.word	0x0800c1e4
- 8002b64:	08002f21 	.word	0x08002f21
- 8002b68:	200006b0 	.word	0x200006b0
+ 8002b64:	08002f1d 	.word	0x08002f1d
+ 8002b68:	200006b4 	.word	0x200006b4
  8002b6c:	0800c1f0 	.word	0x0800c1f0
  8002b70:	08002b75 	.word	0x08002b75
 
@@ -6683,7 +6683,7 @@ void task_readJoystick_fct( void *pvParameters ){
  8002b7c:	e002      	b.n	8002b84 <task_readJoystick_fct+0x10>
  8002b7e:	2032      	movs	r0, #50	; 0x32
  8002b80:	f006 fdd2 	bl	8009728 <vTaskDelay>
- 8002b84:	4b0f      	ldr	r3, [pc, #60]	; (8002bc4 <task_readJoystick_fct+0x50>)
+ 8002b84:	4b14      	ldr	r3, [pc, #80]	; (8002bd8 <task_readJoystick_fct+0x64>)
  8002b86:	681b      	ldr	r3, [r3, #0]
  8002b88:	2b00      	cmp	r3, #0
  8002b8a:	d0f8      	beq.n	8002b7e <task_readJoystick_fct+0xa>
@@ -6693,674 +6693,671 @@ void task_readJoystick_fct( void *pvParameters ){
  8002b8c:	e002      	b.n	8002b94 <task_readJoystick_fct+0x20>
  8002b8e:	200a      	movs	r0, #10
  8002b90:	f006 fdca 	bl	8009728 <vTaskDelay>
- 8002b94:	4b0c      	ldr	r3, [pc, #48]	; (8002bc8 <task_readJoystick_fct+0x54>)
+ 8002b94:	4b11      	ldr	r3, [pc, #68]	; (8002bdc <task_readJoystick_fct+0x68>)
  8002b96:	781b      	ldrb	r3, [r3, #0]
  8002b98:	2b00      	cmp	r3, #0
  8002b9a:	d1f8      	bne.n	8002b8e <task_readJoystick_fct+0x1a>
 
 	while(1){
-		enum Direction newDirection = readJoystick();
- 8002b9c:	f7ff fcc2 	bl	8002524 <readJoystick>
- 8002ba0:	4603      	mov	r3, r0
- 8002ba2:	73fb      	strb	r3, [r7, #15]
+		if(gameFinished){
+ 8002b9c:	4b10      	ldr	r3, [pc, #64]	; (8002be0 <task_readJoystick_fct+0x6c>)
+ 8002b9e:	781b      	ldrb	r3, [r3, #0]
+ 8002ba0:	2b00      	cmp	r3, #0
+ 8002ba2:	d004      	beq.n	8002bae <task_readJoystick_fct+0x3a>
+			vTaskDelay(pdMS_TO_TICKS(1000));
+ 8002ba4:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8002ba8:	f006 fdbe 	bl	8009728 <vTaskDelay>
+ 8002bac:	e7f6      	b.n	8002b9c <task_readJoystick_fct+0x28>
+		}else{
+			enum Direction newDirection = readJoystick();
+ 8002bae:	f7ff fcb9 	bl	8002524 <readJoystick>
+ 8002bb2:	4603      	mov	r3, r0
+ 8002bb4:	73fb      	strb	r3, [r7, #15]
 
-		if(newDirection != IDLE){
- 8002ba4:	7bfb      	ldrb	r3, [r7, #15]
- 8002ba6:	2b04      	cmp	r3, #4
- 8002ba8:	d002      	beq.n	8002bb0 <task_readJoystick_fct+0x3c>
-			currentDirection = newDirection;
- 8002baa:	4a08      	ldr	r2, [pc, #32]	; (8002bcc <task_readJoystick_fct+0x58>)
- 8002bac:	7bfb      	ldrb	r3, [r7, #15]
- 8002bae:	7013      	strb	r3, [r2, #0]
+			if(newDirection != IDLE) currentDirection = newDirection;
+ 8002bb6:	7bfb      	ldrb	r3, [r7, #15]
+ 8002bb8:	2b04      	cmp	r3, #4
+ 8002bba:	d002      	beq.n	8002bc2 <task_readJoystick_fct+0x4e>
+ 8002bbc:	4a09      	ldr	r2, [pc, #36]	; (8002be4 <task_readJoystick_fct+0x70>)
+ 8002bbe:	7bfb      	ldrb	r3, [r7, #15]
+ 8002bc0:	7013      	strb	r3, [r2, #0]
+
+			move_and_compute_new_grid(currentDirection);
+ 8002bc2:	4b08      	ldr	r3, [pc, #32]	; (8002be4 <task_readJoystick_fct+0x70>)
+ 8002bc4:	781b      	ldrb	r3, [r3, #0]
+ 8002bc6:	4618      	mov	r0, r3
+ 8002bc8:	f000 f80e 	bl	8002be8 <move_and_compute_new_grid>
+			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
+ 8002bcc:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+ 8002bd0:	f006 fdaa 	bl	8009728 <vTaskDelay>
+		if(gameFinished){
+ 8002bd4:	e7e2      	b.n	8002b9c <task_readJoystick_fct+0x28>
+ 8002bd6:	bf00      	nop
+ 8002bd8:	200006a8 	.word	0x200006a8
+ 8002bdc:	2000001c 	.word	0x2000001c
+ 8002be0:	200006ac 	.word	0x200006ac
+ 8002be4:	2000052c 	.word	0x2000052c
+
+08002be8 <move_and_compute_new_grid>:
 		}
-
-		//currentDirection = currentDirection != newDirection ? newDirection : currentDirection;
-		move_and_compute_new_grid(currentDirection);
- 8002bb0:	4b06      	ldr	r3, [pc, #24]	; (8002bcc <task_readJoystick_fct+0x58>)
- 8002bb2:	781b      	ldrb	r3, [r3, #0]
- 8002bb4:	4618      	mov	r0, r3
- 8002bb6:	f000 f80b 	bl	8002bd0 <move_and_compute_new_grid>
-		vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
- 8002bba:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
- 8002bbe:	f006 fdb3 	bl	8009728 <vTaskDelay>
-	while(1){
- 8002bc2:	e7eb      	b.n	8002b9c <task_readJoystick_fct+0x28>
- 8002bc4:	200006a8 	.word	0x200006a8
- 8002bc8:	2000001c 	.word	0x2000001c
- 8002bcc:	2000052c 	.word	0x2000052c
-
-08002bd0 <move_and_compute_new_grid>:
 	}
 }
 
 void move_and_compute_new_grid(enum Direction newDirection){
- 8002bd0:	b580      	push	{r7, lr}
- 8002bd2:	b08e      	sub	sp, #56	; 0x38
- 8002bd4:	af00      	add	r7, sp, #0
- 8002bd6:	4603      	mov	r3, r0
- 8002bd8:	71fb      	strb	r3, [r7, #7]
+ 8002be8:	b580      	push	{r7, lr}
+ 8002bea:	b08e      	sub	sp, #56	; 0x38
+ 8002bec:	af00      	add	r7, sp, #0
+ 8002bee:	4603      	mov	r3, r0
+ 8002bf0:	71fb      	strb	r3, [r7, #7]
 
 	if(newDirection == DOWN){
- 8002bda:	79fb      	ldrb	r3, [r7, #7]
- 8002bdc:	2b01      	cmp	r3, #1
- 8002bde:	d143      	bne.n	8002c68 <move_and_compute_new_grid+0x98>
-		// Shift elements up
-		for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
- 8002be0:	2300      	movs	r3, #0
- 8002be2:	637b      	str	r3, [r7, #52]	; 0x34
- 8002be4:	e023      	b.n	8002c2e <move_and_compute_new_grid+0x5e>
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002be6:	2300      	movs	r3, #0
- 8002be8:	633b      	str	r3, [r7, #48]	; 0x30
- 8002bea:	e01a      	b.n	8002c22 <move_and_compute_new_grid+0x52>
-				matrix[i][j] = matrix[i + 1][j];
- 8002bec:	6b7b      	ldr	r3, [r7, #52]	; 0x34
- 8002bee:	1c5a      	adds	r2, r3, #1
- 8002bf0:	498c      	ldr	r1, [pc, #560]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002bf2:	4613      	mov	r3, r2
- 8002bf4:	009b      	lsls	r3, r3, #2
- 8002bf6:	4413      	add	r3, r2
- 8002bf8:	009a      	lsls	r2, r3, #2
- 8002bfa:	4413      	add	r3, r2
- 8002bfc:	18ca      	adds	r2, r1, r3
- 8002bfe:	6b3b      	ldr	r3, [r7, #48]	; 0x30
- 8002c00:	4413      	add	r3, r2
- 8002c02:	7818      	ldrb	r0, [r3, #0]
- 8002c04:	4987      	ldr	r1, [pc, #540]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002c06:	6b7a      	ldr	r2, [r7, #52]	; 0x34
- 8002c08:	4613      	mov	r3, r2
- 8002c0a:	009b      	lsls	r3, r3, #2
- 8002c0c:	4413      	add	r3, r2
- 8002c0e:	009a      	lsls	r2, r3, #2
- 8002c10:	4413      	add	r3, r2
- 8002c12:	18ca      	adds	r2, r1, r3
- 8002c14:	6b3b      	ldr	r3, [r7, #48]	; 0x30
- 8002c16:	4413      	add	r3, r2
- 8002c18:	4602      	mov	r2, r0
- 8002c1a:	701a      	strb	r2, [r3, #0]
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002c1c:	6b3b      	ldr	r3, [r7, #48]	; 0x30
- 8002c1e:	3301      	adds	r3, #1
- 8002c20:	633b      	str	r3, [r7, #48]	; 0x30
- 8002c22:	6b3b      	ldr	r3, [r7, #48]	; 0x30
- 8002c24:	2b18      	cmp	r3, #24
- 8002c26:	dde1      	ble.n	8002bec <move_and_compute_new_grid+0x1c>
-		for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
- 8002c28:	6b7b      	ldr	r3, [r7, #52]	; 0x34
- 8002c2a:	3301      	adds	r3, #1
- 8002c2c:	637b      	str	r3, [r7, #52]	; 0x34
- 8002c2e:	6b7b      	ldr	r3, [r7, #52]	; 0x34
- 8002c30:	2b0d      	cmp	r3, #13
- 8002c32:	ddd8      	ble.n	8002be6 <move_and_compute_new_grid+0x16>
+ 8002bf2:	79fb      	ldrb	r3, [r7, #7]
+ 8002bf4:	2b01      	cmp	r3, #1
+ 8002bf6:	d14c      	bne.n	8002c92 <move_and_compute_new_grid+0xaa>
+		// Check for collision
+		if(matrix[Y_AXIS_CENTER + 1][X_AXIS_CENTER]){
+ 8002bf8:	4ba2      	ldr	r3, [pc, #648]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002bfa:	f893 30d4 	ldrb.w	r3, [r3, #212]	; 0xd4
+ 8002bfe:	2b00      	cmp	r3, #0
+ 8002c00:	d003      	beq.n	8002c0a <move_and_compute_new_grid+0x22>
+			gameFinished = true;
+ 8002c02:	4ba1      	ldr	r3, [pc, #644]	; (8002e88 <move_and_compute_new_grid+0x2a0>)
+ 8002c04:	2201      	movs	r2, #1
+ 8002c06:	701a      	strb	r2, [r3, #0]
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
 			}
 		}
-
-		// Insert new elements
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002c34:	2300      	movs	r3, #0
- 8002c36:	62fb      	str	r3, [r7, #44]	; 0x2c
- 8002c38:	e012      	b.n	8002c60 <move_and_compute_new_grid+0x90>
-			matrix[Y_AXIS_ELEMENTS - 1][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
- 8002c3a:	2064      	movs	r0, #100	; 0x64
- 8002c3c:	f000 f95c 	bl	8002ef8 <getRandomInt>
- 8002c40:	4603      	mov	r3, r0
- 8002c42:	2b04      	cmp	r3, #4
- 8002c44:	bfd4      	ite	le
- 8002c46:	2301      	movle	r3, #1
- 8002c48:	2300      	movgt	r3, #0
- 8002c4a:	b2d9      	uxtb	r1, r3
- 8002c4c:	4a75      	ldr	r2, [pc, #468]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002c4e:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8002c50:	4413      	add	r3, r2
- 8002c52:	f503 73af 	add.w	r3, r3, #350	; 0x15e
- 8002c56:	460a      	mov	r2, r1
- 8002c58:	701a      	strb	r2, [r3, #0]
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002c5a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8002c5c:	3301      	adds	r3, #1
- 8002c5e:	62fb      	str	r3, [r7, #44]	; 0x2c
- 8002c60:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 8002c62:	2b18      	cmp	r3, #24
- 8002c64:	dde9      	ble.n	8002c3a <move_and_compute_new_grid+0x6a>
-		// Insert new elements
-		for(int i = 0; i < X_AXIS_ELEMENTS; i++){
-			matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
-		}
 	}
 }
- 8002c66:	e0d8      	b.n	8002e1a <move_and_compute_new_grid+0x24a>
+ 8002c08:	e137      	b.n	8002e7a <move_and_compute_new_grid+0x292>
+			for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
+ 8002c0a:	2300      	movs	r3, #0
+ 8002c0c:	637b      	str	r3, [r7, #52]	; 0x34
+ 8002c0e:	e023      	b.n	8002c58 <move_and_compute_new_grid+0x70>
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002c10:	2300      	movs	r3, #0
+ 8002c12:	633b      	str	r3, [r7, #48]	; 0x30
+ 8002c14:	e01a      	b.n	8002c4c <move_and_compute_new_grid+0x64>
+					matrix[i][j] = matrix[i + 1][j];
+ 8002c16:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+ 8002c18:	1c5a      	adds	r2, r3, #1
+ 8002c1a:	499a      	ldr	r1, [pc, #616]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002c1c:	4613      	mov	r3, r2
+ 8002c1e:	009b      	lsls	r3, r3, #2
+ 8002c20:	4413      	add	r3, r2
+ 8002c22:	009a      	lsls	r2, r3, #2
+ 8002c24:	4413      	add	r3, r2
+ 8002c26:	18ca      	adds	r2, r1, r3
+ 8002c28:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+ 8002c2a:	4413      	add	r3, r2
+ 8002c2c:	7818      	ldrb	r0, [r3, #0]
+ 8002c2e:	4995      	ldr	r1, [pc, #596]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002c30:	6b7a      	ldr	r2, [r7, #52]	; 0x34
+ 8002c32:	4613      	mov	r3, r2
+ 8002c34:	009b      	lsls	r3, r3, #2
+ 8002c36:	4413      	add	r3, r2
+ 8002c38:	009a      	lsls	r2, r3, #2
+ 8002c3a:	4413      	add	r3, r2
+ 8002c3c:	18ca      	adds	r2, r1, r3
+ 8002c3e:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+ 8002c40:	4413      	add	r3, r2
+ 8002c42:	4602      	mov	r2, r0
+ 8002c44:	701a      	strb	r2, [r3, #0]
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002c46:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+ 8002c48:	3301      	adds	r3, #1
+ 8002c4a:	633b      	str	r3, [r7, #48]	; 0x30
+ 8002c4c:	6b3b      	ldr	r3, [r7, #48]	; 0x30
+ 8002c4e:	2b18      	cmp	r3, #24
+ 8002c50:	dde1      	ble.n	8002c16 <move_and_compute_new_grid+0x2e>
+			for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
+ 8002c52:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+ 8002c54:	3301      	adds	r3, #1
+ 8002c56:	637b      	str	r3, [r7, #52]	; 0x34
+ 8002c58:	6b7b      	ldr	r3, [r7, #52]	; 0x34
+ 8002c5a:	2b0d      	cmp	r3, #13
+ 8002c5c:	ddd8      	ble.n	8002c10 <move_and_compute_new_grid+0x28>
+			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002c5e:	2300      	movs	r3, #0
+ 8002c60:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8002c62:	e012      	b.n	8002c8a <move_and_compute_new_grid+0xa2>
+				matrix[Y_AXIS_ELEMENTS - 1][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+ 8002c64:	2064      	movs	r0, #100	; 0x64
+ 8002c66:	f000 f945 	bl	8002ef4 <getRandomInt>
+ 8002c6a:	4603      	mov	r3, r0
+ 8002c6c:	2b04      	cmp	r3, #4
+ 8002c6e:	bfd4      	ite	le
+ 8002c70:	2301      	movle	r3, #1
+ 8002c72:	2300      	movgt	r3, #0
+ 8002c74:	b2d9      	uxtb	r1, r3
+ 8002c76:	4a83      	ldr	r2, [pc, #524]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002c78:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8002c7a:	4413      	add	r3, r2
+ 8002c7c:	f503 73af 	add.w	r3, r3, #350	; 0x15e
+ 8002c80:	460a      	mov	r2, r1
+ 8002c82:	701a      	strb	r2, [r3, #0]
+			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002c84:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8002c86:	3301      	adds	r3, #1
+ 8002c88:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8002c8a:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 8002c8c:	2b18      	cmp	r3, #24
+ 8002c8e:	dde9      	ble.n	8002c64 <move_and_compute_new_grid+0x7c>
+}
+ 8002c90:	e0f3      	b.n	8002e7a <move_and_compute_new_grid+0x292>
 	}else if(newDirection == UP){
- 8002c68:	79fb      	ldrb	r3, [r7, #7]
- 8002c6a:	2b00      	cmp	r3, #0
- 8002c6c:	d141      	bne.n	8002cf2 <move_and_compute_new_grid+0x122>
-		for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
- 8002c6e:	230e      	movs	r3, #14
- 8002c70:	62bb      	str	r3, [r7, #40]	; 0x28
- 8002c72:	e023      	b.n	8002cbc <move_and_compute_new_grid+0xec>
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002c74:	2300      	movs	r3, #0
- 8002c76:	627b      	str	r3, [r7, #36]	; 0x24
- 8002c78:	e01a      	b.n	8002cb0 <move_and_compute_new_grid+0xe0>
-				matrix[i][j] = matrix[i - 1][j];
- 8002c7a:	6abb      	ldr	r3, [r7, #40]	; 0x28
- 8002c7c:	1e5a      	subs	r2, r3, #1
- 8002c7e:	4969      	ldr	r1, [pc, #420]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002c80:	4613      	mov	r3, r2
- 8002c82:	009b      	lsls	r3, r3, #2
- 8002c84:	4413      	add	r3, r2
- 8002c86:	009a      	lsls	r2, r3, #2
- 8002c88:	4413      	add	r3, r2
- 8002c8a:	18ca      	adds	r2, r1, r3
- 8002c8c:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002c8e:	4413      	add	r3, r2
- 8002c90:	7818      	ldrb	r0, [r3, #0]
- 8002c92:	4964      	ldr	r1, [pc, #400]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002c94:	6aba      	ldr	r2, [r7, #40]	; 0x28
- 8002c96:	4613      	mov	r3, r2
- 8002c98:	009b      	lsls	r3, r3, #2
- 8002c9a:	4413      	add	r3, r2
- 8002c9c:	009a      	lsls	r2, r3, #2
- 8002c9e:	4413      	add	r3, r2
- 8002ca0:	18ca      	adds	r2, r1, r3
- 8002ca2:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002ca4:	4413      	add	r3, r2
- 8002ca6:	4602      	mov	r2, r0
- 8002ca8:	701a      	strb	r2, [r3, #0]
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002caa:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002cac:	3301      	adds	r3, #1
- 8002cae:	627b      	str	r3, [r7, #36]	; 0x24
- 8002cb0:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002cb2:	2b18      	cmp	r3, #24
- 8002cb4:	dde1      	ble.n	8002c7a <move_and_compute_new_grid+0xaa>
-		for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
+ 8002c92:	79fb      	ldrb	r3, [r7, #7]
+ 8002c94:	2b00      	cmp	r3, #0
+ 8002c96:	d14a      	bne.n	8002d2e <move_and_compute_new_grid+0x146>
+		if(matrix[Y_AXIS_CENTER - 1][X_AXIS_CENTER]){
+ 8002c98:	4b7a      	ldr	r3, [pc, #488]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002c9a:	f893 30a2 	ldrb.w	r3, [r3, #162]	; 0xa2
+ 8002c9e:	2b00      	cmp	r3, #0
+ 8002ca0:	d003      	beq.n	8002caa <move_and_compute_new_grid+0xc2>
+			gameFinished = true;
+ 8002ca2:	4b79      	ldr	r3, [pc, #484]	; (8002e88 <move_and_compute_new_grid+0x2a0>)
+ 8002ca4:	2201      	movs	r2, #1
+ 8002ca6:	701a      	strb	r2, [r3, #0]
+}
+ 8002ca8:	e0e7      	b.n	8002e7a <move_and_compute_new_grid+0x292>
+			for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
+ 8002caa:	230e      	movs	r3, #14
+ 8002cac:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8002cae:	e023      	b.n	8002cf8 <move_and_compute_new_grid+0x110>
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002cb0:	2300      	movs	r3, #0
+ 8002cb2:	627b      	str	r3, [r7, #36]	; 0x24
+ 8002cb4:	e01a      	b.n	8002cec <move_and_compute_new_grid+0x104>
+					matrix[i][j] = matrix[i - 1][j];
  8002cb6:	6abb      	ldr	r3, [r7, #40]	; 0x28
- 8002cb8:	3b01      	subs	r3, #1
- 8002cba:	62bb      	str	r3, [r7, #40]	; 0x28
- 8002cbc:	6abb      	ldr	r3, [r7, #40]	; 0x28
- 8002cbe:	2b00      	cmp	r3, #0
- 8002cc0:	dcd8      	bgt.n	8002c74 <move_and_compute_new_grid+0xa4>
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002cc2:	2300      	movs	r3, #0
- 8002cc4:	623b      	str	r3, [r7, #32]
- 8002cc6:	e010      	b.n	8002cea <move_and_compute_new_grid+0x11a>
-			matrix[0][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
- 8002cc8:	2064      	movs	r0, #100	; 0x64
- 8002cca:	f000 f915 	bl	8002ef8 <getRandomInt>
- 8002cce:	4603      	mov	r3, r0
- 8002cd0:	2b04      	cmp	r3, #4
- 8002cd2:	bfd4      	ite	le
- 8002cd4:	2301      	movle	r3, #1
- 8002cd6:	2300      	movgt	r3, #0
- 8002cd8:	b2d9      	uxtb	r1, r3
- 8002cda:	4a52      	ldr	r2, [pc, #328]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002cdc:	6a3b      	ldr	r3, [r7, #32]
- 8002cde:	4413      	add	r3, r2
- 8002ce0:	460a      	mov	r2, r1
- 8002ce2:	701a      	strb	r2, [r3, #0]
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002ce4:	6a3b      	ldr	r3, [r7, #32]
- 8002ce6:	3301      	adds	r3, #1
- 8002ce8:	623b      	str	r3, [r7, #32]
- 8002cea:	6a3b      	ldr	r3, [r7, #32]
- 8002cec:	2b18      	cmp	r3, #24
- 8002cee:	ddeb      	ble.n	8002cc8 <move_and_compute_new_grid+0xf8>
+ 8002cb8:	1e5a      	subs	r2, r3, #1
+ 8002cba:	4972      	ldr	r1, [pc, #456]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002cbc:	4613      	mov	r3, r2
+ 8002cbe:	009b      	lsls	r3, r3, #2
+ 8002cc0:	4413      	add	r3, r2
+ 8002cc2:	009a      	lsls	r2, r3, #2
+ 8002cc4:	4413      	add	r3, r2
+ 8002cc6:	18ca      	adds	r2, r1, r3
+ 8002cc8:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8002cca:	4413      	add	r3, r2
+ 8002ccc:	7818      	ldrb	r0, [r3, #0]
+ 8002cce:	496d      	ldr	r1, [pc, #436]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002cd0:	6aba      	ldr	r2, [r7, #40]	; 0x28
+ 8002cd2:	4613      	mov	r3, r2
+ 8002cd4:	009b      	lsls	r3, r3, #2
+ 8002cd6:	4413      	add	r3, r2
+ 8002cd8:	009a      	lsls	r2, r3, #2
+ 8002cda:	4413      	add	r3, r2
+ 8002cdc:	18ca      	adds	r2, r1, r3
+ 8002cde:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8002ce0:	4413      	add	r3, r2
+ 8002ce2:	4602      	mov	r2, r0
+ 8002ce4:	701a      	strb	r2, [r3, #0]
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002ce6:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8002ce8:	3301      	adds	r3, #1
+ 8002cea:	627b      	str	r3, [r7, #36]	; 0x24
+ 8002cec:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8002cee:	2b18      	cmp	r3, #24
+ 8002cf0:	dde1      	ble.n	8002cb6 <move_and_compute_new_grid+0xce>
+			for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
+ 8002cf2:	6abb      	ldr	r3, [r7, #40]	; 0x28
+ 8002cf4:	3b01      	subs	r3, #1
+ 8002cf6:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8002cf8:	6abb      	ldr	r3, [r7, #40]	; 0x28
+ 8002cfa:	2b00      	cmp	r3, #0
+ 8002cfc:	dcd8      	bgt.n	8002cb0 <move_and_compute_new_grid+0xc8>
+			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002cfe:	2300      	movs	r3, #0
+ 8002d00:	623b      	str	r3, [r7, #32]
+ 8002d02:	e010      	b.n	8002d26 <move_and_compute_new_grid+0x13e>
+				matrix[0][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+ 8002d04:	2064      	movs	r0, #100	; 0x64
+ 8002d06:	f000 f8f5 	bl	8002ef4 <getRandomInt>
+ 8002d0a:	4603      	mov	r3, r0
+ 8002d0c:	2b04      	cmp	r3, #4
+ 8002d0e:	bfd4      	ite	le
+ 8002d10:	2301      	movle	r3, #1
+ 8002d12:	2300      	movgt	r3, #0
+ 8002d14:	b2d9      	uxtb	r1, r3
+ 8002d16:	4a5b      	ldr	r2, [pc, #364]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002d18:	6a3b      	ldr	r3, [r7, #32]
+ 8002d1a:	4413      	add	r3, r2
+ 8002d1c:	460a      	mov	r2, r1
+ 8002d1e:	701a      	strb	r2, [r3, #0]
+			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002d20:	6a3b      	ldr	r3, [r7, #32]
+ 8002d22:	3301      	adds	r3, #1
+ 8002d24:	623b      	str	r3, [r7, #32]
+ 8002d26:	6a3b      	ldr	r3, [r7, #32]
+ 8002d28:	2b18      	cmp	r3, #24
+ 8002d2a:	ddeb      	ble.n	8002d04 <move_and_compute_new_grid+0x11c>
 }
- 8002cf0:	e093      	b.n	8002e1a <move_and_compute_new_grid+0x24a>
+ 8002d2c:	e0a5      	b.n	8002e7a <move_and_compute_new_grid+0x292>
 	}else if(newDirection == LEFT){
- 8002cf2:	79fb      	ldrb	r3, [r7, #7]
- 8002cf4:	2b02      	cmp	r3, #2
- 8002cf6:	d146      	bne.n	8002d86 <move_and_compute_new_grid+0x1b6>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002cf8:	2300      	movs	r3, #0
- 8002cfa:	61fb      	str	r3, [r7, #28]
- 8002cfc:	e023      	b.n	8002d46 <move_and_compute_new_grid+0x176>
-			for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
- 8002cfe:	2318      	movs	r3, #24
- 8002d00:	61bb      	str	r3, [r7, #24]
- 8002d02:	e01a      	b.n	8002d3a <move_and_compute_new_grid+0x16a>
-				matrix[i][j] = 	matrix[i][j - 1];
- 8002d04:	69bb      	ldr	r3, [r7, #24]
- 8002d06:	1e59      	subs	r1, r3, #1
- 8002d08:	4846      	ldr	r0, [pc, #280]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002d0a:	69fa      	ldr	r2, [r7, #28]
- 8002d0c:	4613      	mov	r3, r2
- 8002d0e:	009b      	lsls	r3, r3, #2
- 8002d10:	4413      	add	r3, r2
- 8002d12:	009a      	lsls	r2, r3, #2
- 8002d14:	4413      	add	r3, r2
- 8002d16:	4403      	add	r3, r0
- 8002d18:	440b      	add	r3, r1
- 8002d1a:	7818      	ldrb	r0, [r3, #0]
- 8002d1c:	4941      	ldr	r1, [pc, #260]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002d1e:	69fa      	ldr	r2, [r7, #28]
- 8002d20:	4613      	mov	r3, r2
- 8002d22:	009b      	lsls	r3, r3, #2
- 8002d24:	4413      	add	r3, r2
- 8002d26:	009a      	lsls	r2, r3, #2
- 8002d28:	4413      	add	r3, r2
- 8002d2a:	18ca      	adds	r2, r1, r3
- 8002d2c:	69bb      	ldr	r3, [r7, #24]
- 8002d2e:	4413      	add	r3, r2
- 8002d30:	4602      	mov	r2, r0
- 8002d32:	701a      	strb	r2, [r3, #0]
-			for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
- 8002d34:	69bb      	ldr	r3, [r7, #24]
- 8002d36:	3b01      	subs	r3, #1
- 8002d38:	61bb      	str	r3, [r7, #24]
- 8002d3a:	69bb      	ldr	r3, [r7, #24]
- 8002d3c:	2b00      	cmp	r3, #0
- 8002d3e:	dce1      	bgt.n	8002d04 <move_and_compute_new_grid+0x134>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002d40:	69fb      	ldr	r3, [r7, #28]
- 8002d42:	3301      	adds	r3, #1
- 8002d44:	61fb      	str	r3, [r7, #28]
- 8002d46:	69fb      	ldr	r3, [r7, #28]
- 8002d48:	2b0e      	cmp	r3, #14
- 8002d4a:	ddd8      	ble.n	8002cfe <move_and_compute_new_grid+0x12e>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002d4c:	2300      	movs	r3, #0
- 8002d4e:	617b      	str	r3, [r7, #20]
- 8002d50:	e015      	b.n	8002d7e <move_and_compute_new_grid+0x1ae>
-			matrix[i][0] = getRandomInt(100) <= SPAWN_PERCENTAGE;
- 8002d52:	2064      	movs	r0, #100	; 0x64
- 8002d54:	f000 f8d0 	bl	8002ef8 <getRandomInt>
- 8002d58:	4603      	mov	r3, r0
- 8002d5a:	2b04      	cmp	r3, #4
- 8002d5c:	bfd4      	ite	le
- 8002d5e:	2301      	movle	r3, #1
- 8002d60:	2300      	movgt	r3, #0
- 8002d62:	b2d8      	uxtb	r0, r3
- 8002d64:	492f      	ldr	r1, [pc, #188]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002d66:	697a      	ldr	r2, [r7, #20]
- 8002d68:	4613      	mov	r3, r2
- 8002d6a:	009b      	lsls	r3, r3, #2
- 8002d6c:	4413      	add	r3, r2
- 8002d6e:	009a      	lsls	r2, r3, #2
- 8002d70:	4413      	add	r3, r2
- 8002d72:	440b      	add	r3, r1
- 8002d74:	4602      	mov	r2, r0
- 8002d76:	701a      	strb	r2, [r3, #0]
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002d78:	697b      	ldr	r3, [r7, #20]
- 8002d7a:	3301      	adds	r3, #1
- 8002d7c:	617b      	str	r3, [r7, #20]
- 8002d7e:	697b      	ldr	r3, [r7, #20]
- 8002d80:	2b0e      	cmp	r3, #14
- 8002d82:	dde6      	ble.n	8002d52 <move_and_compute_new_grid+0x182>
+ 8002d2e:	79fb      	ldrb	r3, [r7, #7]
+ 8002d30:	2b02      	cmp	r3, #2
+ 8002d32:	d14f      	bne.n	8002dd4 <move_and_compute_new_grid+0x1ec>
+		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER - 1]){
+ 8002d34:	4b53      	ldr	r3, [pc, #332]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002d36:	f893 30ba 	ldrb.w	r3, [r3, #186]	; 0xba
+ 8002d3a:	2b00      	cmp	r3, #0
+ 8002d3c:	d003      	beq.n	8002d46 <move_and_compute_new_grid+0x15e>
+			gameFinished = true;
+ 8002d3e:	4b52      	ldr	r3, [pc, #328]	; (8002e88 <move_and_compute_new_grid+0x2a0>)
+ 8002d40:	2201      	movs	r2, #1
+ 8002d42:	701a      	strb	r2, [r3, #0]
 }
- 8002d84:	e049      	b.n	8002e1a <move_and_compute_new_grid+0x24a>
+ 8002d44:	e099      	b.n	8002e7a <move_and_compute_new_grid+0x292>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002d46:	2300      	movs	r3, #0
+ 8002d48:	61fb      	str	r3, [r7, #28]
+ 8002d4a:	e023      	b.n	8002d94 <move_and_compute_new_grid+0x1ac>
+				for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
+ 8002d4c:	2318      	movs	r3, #24
+ 8002d4e:	61bb      	str	r3, [r7, #24]
+ 8002d50:	e01a      	b.n	8002d88 <move_and_compute_new_grid+0x1a0>
+					matrix[i][j] = 	matrix[i][j - 1];
+ 8002d52:	69bb      	ldr	r3, [r7, #24]
+ 8002d54:	1e59      	subs	r1, r3, #1
+ 8002d56:	484b      	ldr	r0, [pc, #300]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002d58:	69fa      	ldr	r2, [r7, #28]
+ 8002d5a:	4613      	mov	r3, r2
+ 8002d5c:	009b      	lsls	r3, r3, #2
+ 8002d5e:	4413      	add	r3, r2
+ 8002d60:	009a      	lsls	r2, r3, #2
+ 8002d62:	4413      	add	r3, r2
+ 8002d64:	4403      	add	r3, r0
+ 8002d66:	440b      	add	r3, r1
+ 8002d68:	7818      	ldrb	r0, [r3, #0]
+ 8002d6a:	4946      	ldr	r1, [pc, #280]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002d6c:	69fa      	ldr	r2, [r7, #28]
+ 8002d6e:	4613      	mov	r3, r2
+ 8002d70:	009b      	lsls	r3, r3, #2
+ 8002d72:	4413      	add	r3, r2
+ 8002d74:	009a      	lsls	r2, r3, #2
+ 8002d76:	4413      	add	r3, r2
+ 8002d78:	18ca      	adds	r2, r1, r3
+ 8002d7a:	69bb      	ldr	r3, [r7, #24]
+ 8002d7c:	4413      	add	r3, r2
+ 8002d7e:	4602      	mov	r2, r0
+ 8002d80:	701a      	strb	r2, [r3, #0]
+				for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
+ 8002d82:	69bb      	ldr	r3, [r7, #24]
+ 8002d84:	3b01      	subs	r3, #1
+ 8002d86:	61bb      	str	r3, [r7, #24]
+ 8002d88:	69bb      	ldr	r3, [r7, #24]
+ 8002d8a:	2b00      	cmp	r3, #0
+ 8002d8c:	dce1      	bgt.n	8002d52 <move_and_compute_new_grid+0x16a>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002d8e:	69fb      	ldr	r3, [r7, #28]
+ 8002d90:	3301      	adds	r3, #1
+ 8002d92:	61fb      	str	r3, [r7, #28]
+ 8002d94:	69fb      	ldr	r3, [r7, #28]
+ 8002d96:	2b0e      	cmp	r3, #14
+ 8002d98:	ddd8      	ble.n	8002d4c <move_and_compute_new_grid+0x164>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002d9a:	2300      	movs	r3, #0
+ 8002d9c:	617b      	str	r3, [r7, #20]
+ 8002d9e:	e015      	b.n	8002dcc <move_and_compute_new_grid+0x1e4>
+				matrix[i][0] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+ 8002da0:	2064      	movs	r0, #100	; 0x64
+ 8002da2:	f000 f8a7 	bl	8002ef4 <getRandomInt>
+ 8002da6:	4603      	mov	r3, r0
+ 8002da8:	2b04      	cmp	r3, #4
+ 8002daa:	bfd4      	ite	le
+ 8002dac:	2301      	movle	r3, #1
+ 8002dae:	2300      	movgt	r3, #0
+ 8002db0:	b2d8      	uxtb	r0, r3
+ 8002db2:	4934      	ldr	r1, [pc, #208]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002db4:	697a      	ldr	r2, [r7, #20]
+ 8002db6:	4613      	mov	r3, r2
+ 8002db8:	009b      	lsls	r3, r3, #2
+ 8002dba:	4413      	add	r3, r2
+ 8002dbc:	009a      	lsls	r2, r3, #2
+ 8002dbe:	4413      	add	r3, r2
+ 8002dc0:	440b      	add	r3, r1
+ 8002dc2:	4602      	mov	r2, r0
+ 8002dc4:	701a      	strb	r2, [r3, #0]
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002dc6:	697b      	ldr	r3, [r7, #20]
+ 8002dc8:	3301      	adds	r3, #1
+ 8002dca:	617b      	str	r3, [r7, #20]
+ 8002dcc:	697b      	ldr	r3, [r7, #20]
+ 8002dce:	2b0e      	cmp	r3, #14
+ 8002dd0:	dde6      	ble.n	8002da0 <move_and_compute_new_grid+0x1b8>
+}
+ 8002dd2:	e052      	b.n	8002e7a <move_and_compute_new_grid+0x292>
 	}else if(newDirection == RIGHT){
- 8002d86:	79fb      	ldrb	r3, [r7, #7]
- 8002d88:	2b03      	cmp	r3, #3
- 8002d8a:	d146      	bne.n	8002e1a <move_and_compute_new_grid+0x24a>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002d8c:	2300      	movs	r3, #0
- 8002d8e:	613b      	str	r3, [r7, #16]
- 8002d90:	e023      	b.n	8002dda <move_and_compute_new_grid+0x20a>
-			for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
- 8002d92:	2300      	movs	r3, #0
- 8002d94:	60fb      	str	r3, [r7, #12]
- 8002d96:	e01a      	b.n	8002dce <move_and_compute_new_grid+0x1fe>
-				matrix[i][j] = matrix[i][j + 1];
- 8002d98:	68fb      	ldr	r3, [r7, #12]
- 8002d9a:	1c59      	adds	r1, r3, #1
- 8002d9c:	4821      	ldr	r0, [pc, #132]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002d9e:	693a      	ldr	r2, [r7, #16]
- 8002da0:	4613      	mov	r3, r2
- 8002da2:	009b      	lsls	r3, r3, #2
- 8002da4:	4413      	add	r3, r2
- 8002da6:	009a      	lsls	r2, r3, #2
- 8002da8:	4413      	add	r3, r2
- 8002daa:	4403      	add	r3, r0
- 8002dac:	440b      	add	r3, r1
- 8002dae:	7818      	ldrb	r0, [r3, #0]
- 8002db0:	491c      	ldr	r1, [pc, #112]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002db2:	693a      	ldr	r2, [r7, #16]
- 8002db4:	4613      	mov	r3, r2
- 8002db6:	009b      	lsls	r3, r3, #2
- 8002db8:	4413      	add	r3, r2
- 8002dba:	009a      	lsls	r2, r3, #2
- 8002dbc:	4413      	add	r3, r2
- 8002dbe:	18ca      	adds	r2, r1, r3
- 8002dc0:	68fb      	ldr	r3, [r7, #12]
- 8002dc2:	4413      	add	r3, r2
- 8002dc4:	4602      	mov	r2, r0
- 8002dc6:	701a      	strb	r2, [r3, #0]
-			for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
- 8002dc8:	68fb      	ldr	r3, [r7, #12]
- 8002dca:	3301      	adds	r3, #1
- 8002dcc:	60fb      	str	r3, [r7, #12]
- 8002dce:	68fb      	ldr	r3, [r7, #12]
- 8002dd0:	2b17      	cmp	r3, #23
- 8002dd2:	dde1      	ble.n	8002d98 <move_and_compute_new_grid+0x1c8>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002dd4:	693b      	ldr	r3, [r7, #16]
- 8002dd6:	3301      	adds	r3, #1
- 8002dd8:	613b      	str	r3, [r7, #16]
- 8002dda:	693b      	ldr	r3, [r7, #16]
- 8002ddc:	2b0e      	cmp	r3, #14
- 8002dde:	ddd8      	ble.n	8002d92 <move_and_compute_new_grid+0x1c2>
-		for(int i = 0; i < X_AXIS_ELEMENTS; i++){
- 8002de0:	2300      	movs	r3, #0
- 8002de2:	60bb      	str	r3, [r7, #8]
- 8002de4:	e016      	b.n	8002e14 <move_and_compute_new_grid+0x244>
-			matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
- 8002de6:	2064      	movs	r0, #100	; 0x64
- 8002de8:	f000 f886 	bl	8002ef8 <getRandomInt>
- 8002dec:	4603      	mov	r3, r0
- 8002dee:	2b04      	cmp	r3, #4
- 8002df0:	bfd4      	ite	le
- 8002df2:	2301      	movle	r3, #1
- 8002df4:	2300      	movgt	r3, #0
- 8002df6:	b2d8      	uxtb	r0, r3
- 8002df8:	490a      	ldr	r1, [pc, #40]	; (8002e24 <move_and_compute_new_grid+0x254>)
- 8002dfa:	68ba      	ldr	r2, [r7, #8]
- 8002dfc:	4613      	mov	r3, r2
- 8002dfe:	009b      	lsls	r3, r3, #2
- 8002e00:	4413      	add	r3, r2
- 8002e02:	009a      	lsls	r2, r3, #2
- 8002e04:	4413      	add	r3, r2
- 8002e06:	440b      	add	r3, r1
- 8002e08:	3318      	adds	r3, #24
- 8002e0a:	4602      	mov	r2, r0
- 8002e0c:	701a      	strb	r2, [r3, #0]
-		for(int i = 0; i < X_AXIS_ELEMENTS; i++){
- 8002e0e:	68bb      	ldr	r3, [r7, #8]
- 8002e10:	3301      	adds	r3, #1
- 8002e12:	60bb      	str	r3, [r7, #8]
- 8002e14:	68bb      	ldr	r3, [r7, #8]
- 8002e16:	2b18      	cmp	r3, #24
- 8002e18:	dde5      	ble.n	8002de6 <move_and_compute_new_grid+0x216>
+ 8002dd4:	79fb      	ldrb	r3, [r7, #7]
+ 8002dd6:	2b03      	cmp	r3, #3
+ 8002dd8:	d14f      	bne.n	8002e7a <move_and_compute_new_grid+0x292>
+		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER + 1]){
+ 8002dda:	4b2a      	ldr	r3, [pc, #168]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002ddc:	f893 30bc 	ldrb.w	r3, [r3, #188]	; 0xbc
+ 8002de0:	2b00      	cmp	r3, #0
+ 8002de2:	d003      	beq.n	8002dec <move_and_compute_new_grid+0x204>
+			gameFinished = true;
+ 8002de4:	4b28      	ldr	r3, [pc, #160]	; (8002e88 <move_and_compute_new_grid+0x2a0>)
+ 8002de6:	2201      	movs	r2, #1
+ 8002de8:	701a      	strb	r2, [r3, #0]
 }
- 8002e1a:	bf00      	nop
- 8002e1c:	3738      	adds	r7, #56	; 0x38
- 8002e1e:	46bd      	mov	sp, r7
- 8002e20:	bd80      	pop	{r7, pc}
- 8002e22:	bf00      	nop
- 8002e24:	20000530 	.word	0x20000530
+ 8002dea:	e046      	b.n	8002e7a <move_and_compute_new_grid+0x292>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002dec:	2300      	movs	r3, #0
+ 8002dee:	613b      	str	r3, [r7, #16]
+ 8002df0:	e023      	b.n	8002e3a <move_and_compute_new_grid+0x252>
+				for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
+ 8002df2:	2300      	movs	r3, #0
+ 8002df4:	60fb      	str	r3, [r7, #12]
+ 8002df6:	e01a      	b.n	8002e2e <move_and_compute_new_grid+0x246>
+					matrix[i][j] = matrix[i][j + 1];
+ 8002df8:	68fb      	ldr	r3, [r7, #12]
+ 8002dfa:	1c59      	adds	r1, r3, #1
+ 8002dfc:	4821      	ldr	r0, [pc, #132]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002dfe:	693a      	ldr	r2, [r7, #16]
+ 8002e00:	4613      	mov	r3, r2
+ 8002e02:	009b      	lsls	r3, r3, #2
+ 8002e04:	4413      	add	r3, r2
+ 8002e06:	009a      	lsls	r2, r3, #2
+ 8002e08:	4413      	add	r3, r2
+ 8002e0a:	4403      	add	r3, r0
+ 8002e0c:	440b      	add	r3, r1
+ 8002e0e:	7818      	ldrb	r0, [r3, #0]
+ 8002e10:	491c      	ldr	r1, [pc, #112]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002e12:	693a      	ldr	r2, [r7, #16]
+ 8002e14:	4613      	mov	r3, r2
+ 8002e16:	009b      	lsls	r3, r3, #2
+ 8002e18:	4413      	add	r3, r2
+ 8002e1a:	009a      	lsls	r2, r3, #2
+ 8002e1c:	4413      	add	r3, r2
+ 8002e1e:	18ca      	adds	r2, r1, r3
+ 8002e20:	68fb      	ldr	r3, [r7, #12]
+ 8002e22:	4413      	add	r3, r2
+ 8002e24:	4602      	mov	r2, r0
+ 8002e26:	701a      	strb	r2, [r3, #0]
+				for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
+ 8002e28:	68fb      	ldr	r3, [r7, #12]
+ 8002e2a:	3301      	adds	r3, #1
+ 8002e2c:	60fb      	str	r3, [r7, #12]
+ 8002e2e:	68fb      	ldr	r3, [r7, #12]
+ 8002e30:	2b17      	cmp	r3, #23
+ 8002e32:	dde1      	ble.n	8002df8 <move_and_compute_new_grid+0x210>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002e34:	693b      	ldr	r3, [r7, #16]
+ 8002e36:	3301      	adds	r3, #1
+ 8002e38:	613b      	str	r3, [r7, #16]
+ 8002e3a:	693b      	ldr	r3, [r7, #16]
+ 8002e3c:	2b0e      	cmp	r3, #14
+ 8002e3e:	ddd8      	ble.n	8002df2 <move_and_compute_new_grid+0x20a>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002e40:	2300      	movs	r3, #0
+ 8002e42:	60bb      	str	r3, [r7, #8]
+ 8002e44:	e016      	b.n	8002e74 <move_and_compute_new_grid+0x28c>
+				matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+ 8002e46:	2064      	movs	r0, #100	; 0x64
+ 8002e48:	f000 f854 	bl	8002ef4 <getRandomInt>
+ 8002e4c:	4603      	mov	r3, r0
+ 8002e4e:	2b04      	cmp	r3, #4
+ 8002e50:	bfd4      	ite	le
+ 8002e52:	2301      	movle	r3, #1
+ 8002e54:	2300      	movgt	r3, #0
+ 8002e56:	b2d8      	uxtb	r0, r3
+ 8002e58:	490a      	ldr	r1, [pc, #40]	; (8002e84 <move_and_compute_new_grid+0x29c>)
+ 8002e5a:	68ba      	ldr	r2, [r7, #8]
+ 8002e5c:	4613      	mov	r3, r2
+ 8002e5e:	009b      	lsls	r3, r3, #2
+ 8002e60:	4413      	add	r3, r2
+ 8002e62:	009a      	lsls	r2, r3, #2
+ 8002e64:	4413      	add	r3, r2
+ 8002e66:	440b      	add	r3, r1
+ 8002e68:	3318      	adds	r3, #24
+ 8002e6a:	4602      	mov	r2, r0
+ 8002e6c:	701a      	strb	r2, [r3, #0]
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002e6e:	68bb      	ldr	r3, [r7, #8]
+ 8002e70:	3301      	adds	r3, #1
+ 8002e72:	60bb      	str	r3, [r7, #8]
+ 8002e74:	68bb      	ldr	r3, [r7, #8]
+ 8002e76:	2b0e      	cmp	r3, #14
+ 8002e78:	dde5      	ble.n	8002e46 <move_and_compute_new_grid+0x25e>
+}
+ 8002e7a:	bf00      	nop
+ 8002e7c:	3738      	adds	r7, #56	; 0x38
+ 8002e7e:	46bd      	mov	sp, r7
+ 8002e80:	bd80      	pop	{r7, pc}
+ 8002e82:	bf00      	nop
+ 8002e84:	20000530 	.word	0x20000530
+ 8002e88:	200006ac 	.word	0x200006ac
 
-08002e28 <computeInitialGrid>:
+08002e8c <computeInitialGrid>:
 
 void computeInitialGrid(){
- 8002e28:	b580      	push	{r7, lr}
- 8002e2a:	b084      	sub	sp, #16
- 8002e2c:	af00      	add	r7, sp, #0
+ 8002e8c:	b580      	push	{r7, lr}
+ 8002e8e:	b082      	sub	sp, #8
+ 8002e90:	af00      	add	r7, sp, #0
 	for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002e2e:	2300      	movs	r3, #0
- 8002e30:	60fb      	str	r3, [r7, #12]
- 8002e32:	e020      	b.n	8002e76 <computeInitialGrid+0x4e>
+ 8002e92:	2300      	movs	r3, #0
+ 8002e94:	607b      	str	r3, [r7, #4]
+ 8002e96:	e020      	b.n	8002eda <computeInitialGrid+0x4e>
 		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002e34:	2300      	movs	r3, #0
- 8002e36:	60bb      	str	r3, [r7, #8]
- 8002e38:	e017      	b.n	8002e6a <computeInitialGrid+0x42>
+ 8002e98:	2300      	movs	r3, #0
+ 8002e9a:	603b      	str	r3, [r7, #0]
+ 8002e9c:	e017      	b.n	8002ece <computeInitialGrid+0x42>
 			matrix[i][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
- 8002e3a:	2064      	movs	r0, #100	; 0x64
- 8002e3c:	f000 f85c 	bl	8002ef8 <getRandomInt>
- 8002e40:	4603      	mov	r3, r0
- 8002e42:	2b04      	cmp	r3, #4
- 8002e44:	bfd4      	ite	le
- 8002e46:	2301      	movle	r3, #1
- 8002e48:	2300      	movgt	r3, #0
- 8002e4a:	b2d8      	uxtb	r0, r3
- 8002e4c:	4929      	ldr	r1, [pc, #164]	; (8002ef4 <computeInitialGrid+0xcc>)
- 8002e4e:	68fa      	ldr	r2, [r7, #12]
- 8002e50:	4613      	mov	r3, r2
- 8002e52:	009b      	lsls	r3, r3, #2
- 8002e54:	4413      	add	r3, r2
- 8002e56:	009a      	lsls	r2, r3, #2
- 8002e58:	4413      	add	r3, r2
- 8002e5a:	18ca      	adds	r2, r1, r3
- 8002e5c:	68bb      	ldr	r3, [r7, #8]
- 8002e5e:	4413      	add	r3, r2
- 8002e60:	4602      	mov	r2, r0
- 8002e62:	701a      	strb	r2, [r3, #0]
+ 8002e9e:	2064      	movs	r0, #100	; 0x64
+ 8002ea0:	f000 f828 	bl	8002ef4 <getRandomInt>
+ 8002ea4:	4603      	mov	r3, r0
+ 8002ea6:	2b04      	cmp	r3, #4
+ 8002ea8:	bfd4      	ite	le
+ 8002eaa:	2301      	movle	r3, #1
+ 8002eac:	2300      	movgt	r3, #0
+ 8002eae:	b2d8      	uxtb	r0, r3
+ 8002eb0:	490f      	ldr	r1, [pc, #60]	; (8002ef0 <computeInitialGrid+0x64>)
+ 8002eb2:	687a      	ldr	r2, [r7, #4]
+ 8002eb4:	4613      	mov	r3, r2
+ 8002eb6:	009b      	lsls	r3, r3, #2
+ 8002eb8:	4413      	add	r3, r2
+ 8002eba:	009a      	lsls	r2, r3, #2
+ 8002ebc:	4413      	add	r3, r2
+ 8002ebe:	18ca      	adds	r2, r1, r3
+ 8002ec0:	683b      	ldr	r3, [r7, #0]
+ 8002ec2:	4413      	add	r3, r2
+ 8002ec4:	4602      	mov	r2, r0
+ 8002ec6:	701a      	strb	r2, [r3, #0]
 		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002e64:	68bb      	ldr	r3, [r7, #8]
- 8002e66:	3301      	adds	r3, #1
- 8002e68:	60bb      	str	r3, [r7, #8]
- 8002e6a:	68bb      	ldr	r3, [r7, #8]
- 8002e6c:	2b18      	cmp	r3, #24
- 8002e6e:	dde4      	ble.n	8002e3a <computeInitialGrid+0x12>
+ 8002ec8:	683b      	ldr	r3, [r7, #0]
+ 8002eca:	3301      	adds	r3, #1
+ 8002ecc:	603b      	str	r3, [r7, #0]
+ 8002ece:	683b      	ldr	r3, [r7, #0]
+ 8002ed0:	2b18      	cmp	r3, #24
+ 8002ed2:	dde4      	ble.n	8002e9e <computeInitialGrid+0x12>
 	for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002e70:	68fb      	ldr	r3, [r7, #12]
- 8002e72:	3301      	adds	r3, #1
- 8002e74:	60fb      	str	r3, [r7, #12]
- 8002e76:	68fb      	ldr	r3, [r7, #12]
- 8002e78:	2b0e      	cmp	r3, #14
- 8002e7a:	dddb      	ble.n	8002e34 <computeInitialGrid+0xc>
+ 8002ed4:	687b      	ldr	r3, [r7, #4]
+ 8002ed6:	3301      	adds	r3, #1
+ 8002ed8:	607b      	str	r3, [r7, #4]
+ 8002eda:	687b      	ldr	r3, [r7, #4]
+ 8002edc:	2b0e      	cmp	r3, #14
+ 8002ede:	dddb      	ble.n	8002e98 <computeInitialGrid+0xc>
 		}
 	}
 
-	// Free central blocks
-	int h_middle = Y_AXIS_ELEMENTS / 2;
- 8002e7c:	2307      	movs	r3, #7
- 8002e7e:	607b      	str	r3, [r7, #4]
-	int w_middle = X_AXIS_ELEMENTS / 2;
- 8002e80:	230c      	movs	r3, #12
- 8002e82:	603b      	str	r3, [r7, #0]
-
-	matrix[h_middle - 1][w_middle - 1] = false;
- 8002e84:	687b      	ldr	r3, [r7, #4]
- 8002e86:	1e5a      	subs	r2, r3, #1
- 8002e88:	683b      	ldr	r3, [r7, #0]
- 8002e8a:	1e59      	subs	r1, r3, #1
- 8002e8c:	4819      	ldr	r0, [pc, #100]	; (8002ef4 <computeInitialGrid+0xcc>)
- 8002e8e:	4613      	mov	r3, r2
- 8002e90:	009b      	lsls	r3, r3, #2
- 8002e92:	4413      	add	r3, r2
- 8002e94:	009a      	lsls	r2, r3, #2
- 8002e96:	4413      	add	r3, r2
- 8002e98:	4403      	add	r3, r0
- 8002e9a:	440b      	add	r3, r1
- 8002e9c:	2200      	movs	r2, #0
- 8002e9e:	701a      	strb	r2, [r3, #0]
-	matrix[h_middle - 1][w_middle] = false;
- 8002ea0:	687b      	ldr	r3, [r7, #4]
- 8002ea2:	1e5a      	subs	r2, r3, #1
- 8002ea4:	4913      	ldr	r1, [pc, #76]	; (8002ef4 <computeInitialGrid+0xcc>)
- 8002ea6:	4613      	mov	r3, r2
- 8002ea8:	009b      	lsls	r3, r3, #2
- 8002eaa:	4413      	add	r3, r2
- 8002eac:	009a      	lsls	r2, r3, #2
- 8002eae:	4413      	add	r3, r2
- 8002eb0:	18ca      	adds	r2, r1, r3
- 8002eb2:	683b      	ldr	r3, [r7, #0]
- 8002eb4:	4413      	add	r3, r2
- 8002eb6:	2200      	movs	r2, #0
- 8002eb8:	701a      	strb	r2, [r3, #0]
-	matrix[h_middle][w_middle - 1] = false;
- 8002eba:	683b      	ldr	r3, [r7, #0]
- 8002ebc:	1e59      	subs	r1, r3, #1
- 8002ebe:	480d      	ldr	r0, [pc, #52]	; (8002ef4 <computeInitialGrid+0xcc>)
- 8002ec0:	687a      	ldr	r2, [r7, #4]
- 8002ec2:	4613      	mov	r3, r2
- 8002ec4:	009b      	lsls	r3, r3, #2
- 8002ec6:	4413      	add	r3, r2
- 8002ec8:	009a      	lsls	r2, r3, #2
- 8002eca:	4413      	add	r3, r2
- 8002ecc:	4403      	add	r3, r0
- 8002ece:	440b      	add	r3, r1
- 8002ed0:	2200      	movs	r2, #0
- 8002ed2:	701a      	strb	r2, [r3, #0]
-	matrix[h_middle][w_middle] = false;
- 8002ed4:	4907      	ldr	r1, [pc, #28]	; (8002ef4 <computeInitialGrid+0xcc>)
- 8002ed6:	687a      	ldr	r2, [r7, #4]
- 8002ed8:	4613      	mov	r3, r2
- 8002eda:	009b      	lsls	r3, r3, #2
- 8002edc:	4413      	add	r3, r2
- 8002ede:	009a      	lsls	r2, r3, #2
- 8002ee0:	4413      	add	r3, r2
- 8002ee2:	18ca      	adds	r2, r1, r3
- 8002ee4:	683b      	ldr	r3, [r7, #0]
- 8002ee6:	4413      	add	r3, r2
- 8002ee8:	2200      	movs	r2, #0
- 8002eea:	701a      	strb	r2, [r3, #0]
+	// Free central block
+	matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS] = false;
+ 8002ee0:	4b03      	ldr	r3, [pc, #12]	; (8002ef0 <computeInitialGrid+0x64>)
+ 8002ee2:	2200      	movs	r2, #0
+ 8002ee4:	f883 2190 	strb.w	r2, [r3, #400]	; 0x190
 }
- 8002eec:	bf00      	nop
- 8002eee:	3710      	adds	r7, #16
- 8002ef0:	46bd      	mov	sp, r7
- 8002ef2:	bd80      	pop	{r7, pc}
- 8002ef4:	20000530 	.word	0x20000530
+ 8002ee8:	bf00      	nop
+ 8002eea:	3708      	adds	r7, #8
+ 8002eec:	46bd      	mov	sp, r7
+ 8002eee:	bd80      	pop	{r7, pc}
+ 8002ef0:	20000530 	.word	0x20000530
 
-08002ef8 <getRandomInt>:
+08002ef4 <getRandomInt>:
 
 int getRandomInt(int max){
- 8002ef8:	b580      	push	{r7, lr}
- 8002efa:	b082      	sub	sp, #8
- 8002efc:	af00      	add	r7, sp, #0
- 8002efe:	6078      	str	r0, [r7, #4]
+ 8002ef4:	b580      	push	{r7, lr}
+ 8002ef6:	b082      	sub	sp, #8
+ 8002ef8:	af00      	add	r7, sp, #0
+ 8002efa:	6078      	str	r0, [r7, #4]
 	// returns from 1 to max
 	return (rand() % max) + 1;
- 8002f00:	f008 f9c8 	bl	800b294 <rand>
- 8002f04:	4603      	mov	r3, r0
- 8002f06:	687a      	ldr	r2, [r7, #4]
- 8002f08:	fb93 f2f2 	sdiv	r2, r3, r2
- 8002f0c:	6879      	ldr	r1, [r7, #4]
- 8002f0e:	fb01 f202 	mul.w	r2, r1, r2
- 8002f12:	1a9b      	subs	r3, r3, r2
- 8002f14:	3301      	adds	r3, #1
+ 8002efc:	f008 f9ca 	bl	800b294 <rand>
+ 8002f00:	4603      	mov	r3, r0
+ 8002f02:	687a      	ldr	r2, [r7, #4]
+ 8002f04:	fb93 f2f2 	sdiv	r2, r3, r2
+ 8002f08:	6879      	ldr	r1, [r7, #4]
+ 8002f0a:	fb01 f202 	mul.w	r2, r1, r2
+ 8002f0e:	1a9b      	subs	r3, r3, r2
+ 8002f10:	3301      	adds	r3, #1
 }
- 8002f16:	4618      	mov	r0, r3
- 8002f18:	3708      	adds	r7, #8
- 8002f1a:	46bd      	mov	sp, r7
- 8002f1c:	bd80      	pop	{r7, pc}
+ 8002f12:	4618      	mov	r0, r3
+ 8002f14:	3708      	adds	r7, #8
+ 8002f16:	46bd      	mov	sp, r7
+ 8002f18:	bd80      	pop	{r7, pc}
 	...
 
-08002f20 <task_draw_fct>:
+08002f1c <task_draw_fct>:
 
 void task_draw_fct( void *pvParameters ){
- 8002f20:	b580      	push	{r7, lr}
- 8002f22:	b086      	sub	sp, #24
- 8002f24:	af02      	add	r7, sp, #8
- 8002f26:	6078      	str	r0, [r7, #4]
+ 8002f1c:	b590      	push	{r4, r7, lr}
+ 8002f1e:	b087      	sub	sp, #28
+ 8002f20:	af02      	add	r7, sp, #8
+ 8002f22:	6078      	str	r0, [r7, #4]
 
 	// Wait until game gets started
 	while(!startGame) vTaskDelay(pdMS_TO_TICKS(50));
- 8002f28:	e002      	b.n	8002f30 <task_draw_fct+0x10>
- 8002f2a:	2032      	movs	r0, #50	; 0x32
- 8002f2c:	f006 fbfc 	bl	8009728 <vTaskDelay>
- 8002f30:	4b36      	ldr	r3, [pc, #216]	; (800300c <task_draw_fct+0xec>)
- 8002f32:	681b      	ldr	r3, [r3, #0]
- 8002f34:	2b00      	cmp	r3, #0
- 8002f36:	d0f8      	beq.n	8002f2a <task_draw_fct+0xa>
+ 8002f24:	e002      	b.n	8002f2c <task_draw_fct+0x10>
+ 8002f26:	2032      	movs	r0, #50	; 0x32
+ 8002f28:	f006 fbfe 	bl	8009728 <vTaskDelay>
+ 8002f2c:	4b35      	ldr	r3, [pc, #212]	; (8003004 <task_draw_fct+0xe8>)
+ 8002f2e:	681b      	ldr	r3, [r3, #0]
+ 8002f30:	2b00      	cmp	r3, #0
+ 8002f32:	d0f8      	beq.n	8002f26 <task_draw_fct+0xa>
 
 	while(1){
-		// Draw bricks
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002f38:	2300      	movs	r3, #0
- 8002f3a:	60bb      	str	r3, [r7, #8]
- 8002f3c:	e037      	b.n	8002fae <task_draw_fct+0x8e>
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002f3e:	2300      	movs	r3, #0
- 8002f40:	60fb      	str	r3, [r7, #12]
- 8002f42:	e02e      	b.n	8002fa2 <task_draw_fct+0x82>
-				if(matrix[i][j]){
- 8002f44:	4932      	ldr	r1, [pc, #200]	; (8003010 <task_draw_fct+0xf0>)
- 8002f46:	68ba      	ldr	r2, [r7, #8]
- 8002f48:	4613      	mov	r3, r2
- 8002f4a:	009b      	lsls	r3, r3, #2
- 8002f4c:	4413      	add	r3, r2
- 8002f4e:	009a      	lsls	r2, r3, #2
- 8002f50:	4413      	add	r3, r2
- 8002f52:	18ca      	adds	r2, r1, r3
- 8002f54:	68fb      	ldr	r3, [r7, #12]
- 8002f56:	4413      	add	r3, r2
- 8002f58:	781b      	ldrb	r3, [r3, #0]
- 8002f5a:	2b00      	cmp	r3, #0
- 8002f5c:	d00f      	beq.n	8002f7e <task_draw_fct+0x5e>
-					draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_WHITE);
- 8002f5e:	68fb      	ldr	r3, [r7, #12]
- 8002f60:	b29b      	uxth	r3, r3
- 8002f62:	015b      	lsls	r3, r3, #5
- 8002f64:	b298      	uxth	r0, r3
- 8002f66:	68bb      	ldr	r3, [r7, #8]
- 8002f68:	b29b      	uxth	r3, r3
- 8002f6a:	015b      	lsls	r3, r3, #5
- 8002f6c:	b299      	uxth	r1, r3
- 8002f6e:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 8002f72:	9300      	str	r3, [sp, #0]
- 8002f74:	2320      	movs	r3, #32
- 8002f76:	2220      	movs	r2, #32
- 8002f78:	f000 f856 	bl	8003028 <draw_filled_square>
- 8002f7c:	e00e      	b.n	8002f9c <task_draw_fct+0x7c>
-				}else{
-					draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_BLACK);
- 8002f7e:	68fb      	ldr	r3, [r7, #12]
- 8002f80:	b29b      	uxth	r3, r3
- 8002f82:	015b      	lsls	r3, r3, #5
- 8002f84:	b298      	uxth	r0, r3
- 8002f86:	68bb      	ldr	r3, [r7, #8]
- 8002f88:	b29b      	uxth	r3, r3
- 8002f8a:	015b      	lsls	r3, r3, #5
- 8002f8c:	b299      	uxth	r1, r3
- 8002f8e:	f04f 437f 	mov.w	r3, #4278190080	; 0xff000000
- 8002f92:	9300      	str	r3, [sp, #0]
- 8002f94:	2320      	movs	r3, #32
- 8002f96:	2220      	movs	r2, #32
- 8002f98:	f000 f846 	bl	8003028 <draw_filled_square>
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
- 8002f9c:	68fb      	ldr	r3, [r7, #12]
- 8002f9e:	3301      	adds	r3, #1
- 8002fa0:	60fb      	str	r3, [r7, #12]
+		if(gameFinished){
+ 8002f34:	4b34      	ldr	r3, [pc, #208]	; (8003008 <task_draw_fct+0xec>)
+ 8002f36:	781b      	ldrb	r3, [r3, #0]
+ 8002f38:	2b00      	cmp	r3, #0
+ 8002f3a:	d007      	beq.n	8002f4c <task_draw_fct+0x30>
+			BSP_LCD_Clear(LCD_COLOR_BLUE);
+ 8002f3c:	4833      	ldr	r0, [pc, #204]	; (800300c <task_draw_fct+0xf0>)
+ 8002f3e:	f7fd fda3 	bl	8000a88 <BSP_LCD_Clear>
+			vTaskDelay(pdMS_TO_TICKS(1000));
+ 8002f42:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
+ 8002f46:	f006 fbef 	bl	8009728 <vTaskDelay>
+ 8002f4a:	e7f3      	b.n	8002f34 <task_draw_fct+0x18>
+		}else{
+			// Draw bricks
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+ 8002f4c:	2300      	movs	r3, #0
+ 8002f4e:	60fb      	str	r3, [r7, #12]
+ 8002f50:	e02a      	b.n	8002fa8 <task_draw_fct+0x8c>
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002f52:	2300      	movs	r3, #0
+ 8002f54:	60bb      	str	r3, [r7, #8]
+ 8002f56:	e021      	b.n	8002f9c <task_draw_fct+0x80>
+					draw_filled_square(
+ 8002f58:	68bb      	ldr	r3, [r7, #8]
+ 8002f5a:	b29b      	uxth	r3, r3
+ 8002f5c:	015b      	lsls	r3, r3, #5
+ 8002f5e:	b298      	uxth	r0, r3
+ 8002f60:	68fb      	ldr	r3, [r7, #12]
+ 8002f62:	b29b      	uxth	r3, r3
+ 8002f64:	015b      	lsls	r3, r3, #5
+ 8002f66:	b299      	uxth	r1, r3
+							j * CUBE_SIDE_LEN,
+							i * CUBE_SIDE_LEN,
+							CUBE_SIDE_LEN,
+							CUBE_SIDE_LEN,
+							matrix[i][j] ? LCD_COLOR_WHITE : LCD_COLOR_BLACK
+ 8002f68:	4c29      	ldr	r4, [pc, #164]	; (8003010 <task_draw_fct+0xf4>)
+ 8002f6a:	68fa      	ldr	r2, [r7, #12]
+ 8002f6c:	4613      	mov	r3, r2
+ 8002f6e:	009b      	lsls	r3, r3, #2
+ 8002f70:	4413      	add	r3, r2
+ 8002f72:	009a      	lsls	r2, r3, #2
+ 8002f74:	4413      	add	r3, r2
+ 8002f76:	18e2      	adds	r2, r4, r3
+ 8002f78:	68bb      	ldr	r3, [r7, #8]
+ 8002f7a:	4413      	add	r3, r2
+ 8002f7c:	781b      	ldrb	r3, [r3, #0]
+					draw_filled_square(
+ 8002f7e:	2b00      	cmp	r3, #0
+ 8002f80:	d002      	beq.n	8002f88 <task_draw_fct+0x6c>
+ 8002f82:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 8002f86:	e001      	b.n	8002f8c <task_draw_fct+0x70>
+ 8002f88:	f04f 437f 	mov.w	r3, #4278190080	; 0xff000000
+ 8002f8c:	9300      	str	r3, [sp, #0]
+ 8002f8e:	2320      	movs	r3, #32
+ 8002f90:	2220      	movs	r2, #32
+ 8002f92:	f000 f849 	bl	8003028 <draw_filled_square>
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+ 8002f96:	68bb      	ldr	r3, [r7, #8]
+ 8002f98:	3301      	adds	r3, #1
+ 8002f9a:	60bb      	str	r3, [r7, #8]
+ 8002f9c:	68bb      	ldr	r3, [r7, #8]
+ 8002f9e:	2b18      	cmp	r3, #24
+ 8002fa0:	ddda      	ble.n	8002f58 <task_draw_fct+0x3c>
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
  8002fa2:	68fb      	ldr	r3, [r7, #12]
- 8002fa4:	2b18      	cmp	r3, #24
- 8002fa6:	ddcd      	ble.n	8002f44 <task_draw_fct+0x24>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8002fa8:	68bb      	ldr	r3, [r7, #8]
- 8002faa:	3301      	adds	r3, #1
- 8002fac:	60bb      	str	r3, [r7, #8]
- 8002fae:	68bb      	ldr	r3, [r7, #8]
- 8002fb0:	2b0e      	cmp	r3, #14
- 8002fb2:	ddc4      	ble.n	8002f3e <task_draw_fct+0x1e>
+ 8002fa4:	3301      	adds	r3, #1
+ 8002fa6:	60fb      	str	r3, [r7, #12]
+ 8002fa8:	68fb      	ldr	r3, [r7, #12]
+ 8002faa:	2b0e      	cmp	r3, #14
+ 8002fac:	ddd1      	ble.n	8002f52 <task_draw_fct+0x36>
+					);
 				}
 			}
-		}
 
-		// Draw player
-		draw_filled_square(DISP_X_SIZE / 2 - CUBE_SIDE_LEN / 2, DISP_Y_SIZE / 2 - CUBE_SIDE_LEN / 2, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_ORANGE);
- 8002fb4:	4b17      	ldr	r3, [pc, #92]	; (8003014 <task_draw_fct+0xf4>)
- 8002fb6:	9300      	str	r3, [sp, #0]
- 8002fb8:	2320      	movs	r3, #32
- 8002fba:	2220      	movs	r2, #32
- 8002fbc:	21e0      	movs	r1, #224	; 0xe0
- 8002fbe:	f44f 70c0 	mov.w	r0, #384	; 0x180
- 8002fc2:	f000 f831 	bl	8003028 <draw_filled_square>
+			// Draw player
+			draw_filled_square(X_AXIS_CENTER * CUBE_SIDE_LEN, Y_AXIS_CENTER * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_ORANGE);
+ 8002fae:	4b19      	ldr	r3, [pc, #100]	; (8003014 <task_draw_fct+0xf8>)
+ 8002fb0:	9300      	str	r3, [sp, #0]
+ 8002fb2:	2320      	movs	r3, #32
+ 8002fb4:	2220      	movs	r2, #32
+ 8002fb6:	21e0      	movs	r1, #224	; 0xe0
+ 8002fb8:	f44f 70c0 	mov.w	r0, #384	; 0x180
+ 8002fbc:	f000 f834 	bl	8003028 <draw_filled_square>
 
-		if(showInitialDelay){
- 8002fc6:	4b14      	ldr	r3, [pc, #80]	; (8003018 <task_draw_fct+0xf8>)
- 8002fc8:	781b      	ldrb	r3, [r3, #0]
- 8002fca:	2b00      	cmp	r3, #0
- 8002fcc:	d006      	beq.n	8002fdc <task_draw_fct+0xbc>
-			// Wait for 3 seconds
-			vTaskDelay(pdMS_TO_TICKS(3000));
- 8002fce:	f640 30b8 	movw	r0, #3000	; 0xbb8
- 8002fd2:	f006 fba9 	bl	8009728 <vTaskDelay>
-			showInitialDelay = false;
- 8002fd6:	4b10      	ldr	r3, [pc, #64]	; (8003018 <task_draw_fct+0xf8>)
- 8002fd8:	2200      	movs	r2, #0
- 8002fda:	701a      	strb	r2, [r3, #0]
-		}
+			if(showInitialDelay){
+ 8002fc0:	4b15      	ldr	r3, [pc, #84]	; (8003018 <task_draw_fct+0xfc>)
+ 8002fc2:	781b      	ldrb	r3, [r3, #0]
+ 8002fc4:	2b00      	cmp	r3, #0
+ 8002fc6:	d006      	beq.n	8002fd6 <task_draw_fct+0xba>
+				// Wait for 3 seconds
+				vTaskDelay(pdMS_TO_TICKS(2000));
+ 8002fc8:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
+ 8002fcc:	f006 fbac 	bl	8009728 <vTaskDelay>
+				showInitialDelay = false;
+ 8002fd0:	4b11      	ldr	r3, [pc, #68]	; (8003018 <task_draw_fct+0xfc>)
+ 8002fd2:	2200      	movs	r2, #0
+ 8002fd4:	701a      	strb	r2, [r3, #0]
+			}
 
-		// Delay
-		vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
- 8002fdc:	4b0f      	ldr	r3, [pc, #60]	; (800301c <task_draw_fct+0xfc>)
- 8002fde:	ed93 7a00 	vldr	s14, [r3]
- 8002fe2:	eddf 6a0f 	vldr	s13, [pc, #60]	; 8003020 <task_draw_fct+0x100>
- 8002fe6:	eec6 7a87 	vdiv.f32	s15, s13, s14
- 8002fea:	eefc 7ae7 	vcvt.u32.f32	s15, s15
- 8002fee:	ee17 2a90 	vmov	r2, s15
- 8002ff2:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
- 8002ff6:	fb02 f303 	mul.w	r3, r2, r3
- 8002ffa:	4a0a      	ldr	r2, [pc, #40]	; (8003024 <task_draw_fct+0x104>)
- 8002ffc:	fba2 2303 	umull	r2, r3, r2, r3
- 8003000:	099b      	lsrs	r3, r3, #6
- 8003002:	4618      	mov	r0, r3
- 8003004:	f006 fb90 	bl	8009728 <vTaskDelay>
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
- 8003008:	e796      	b.n	8002f38 <task_draw_fct+0x18>
- 800300a:	bf00      	nop
- 800300c:	200006a8 	.word	0x200006a8
+			// Delay
+			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
+ 8002fd6:	4b11      	ldr	r3, [pc, #68]	; (800301c <task_draw_fct+0x100>)
+ 8002fd8:	ed93 7a00 	vldr	s14, [r3]
+ 8002fdc:	eddf 6a10 	vldr	s13, [pc, #64]	; 8003020 <task_draw_fct+0x104>
+ 8002fe0:	eec6 7a87 	vdiv.f32	s15, s13, s14
+ 8002fe4:	eefc 7ae7 	vcvt.u32.f32	s15, s15
+ 8002fe8:	ee17 2a90 	vmov	r2, s15
+ 8002fec:	f44f 737a 	mov.w	r3, #1000	; 0x3e8
+ 8002ff0:	fb02 f303 	mul.w	r3, r2, r3
+ 8002ff4:	4a0b      	ldr	r2, [pc, #44]	; (8003024 <task_draw_fct+0x108>)
+ 8002ff6:	fba2 2303 	umull	r2, r3, r2, r3
+ 8002ffa:	099b      	lsrs	r3, r3, #6
+ 8002ffc:	4618      	mov	r0, r3
+ 8002ffe:	f006 fb93 	bl	8009728 <vTaskDelay>
+		if(gameFinished){
+ 8003002:	e797      	b.n	8002f34 <task_draw_fct+0x18>
+ 8003004:	200006a8 	.word	0x200006a8
+ 8003008:	200006ac 	.word	0x200006ac
+ 800300c:	ff0000ff 	.word	0xff0000ff
  8003010:	20000530 	.word	0x20000530
  8003014:	ffffa500 	.word	0xffffa500
  8003018:	2000001c 	.word	0x2000001c
@@ -7369,9 +7366,9 @@ void task_draw_fct( void *pvParameters ){
  8003024:	10624dd3 	.word	0x10624dd3
 
 08003028 <draw_filled_square>:
-		speed += 0.03;
+			}*/
+		}
 	}
-
 }
 
 void draw_filled_square(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color){
@@ -7672,7 +7669,7 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  80031e6:	bd80      	pop	{r7, pc}
  80031e8:	40023800 	.word	0x40023800
  80031ec:	431bde83 	.word	0x431bde83
- 80031f0:	200006b8 	.word	0x200006b8
+ 80031f0:	200006bc 	.word	0x200006bc
  80031f4:	40001000 	.word	0x40001000
  80031f8:	20000024 	.word	0x20000024
 
@@ -7817,7 +7814,7 @@ void TIM6_DAC_IRQHandler(void)
  8003242:	bf00      	nop
  8003244:	bd80      	pop	{r7, pc}
  8003246:	bf00      	nop
- 8003248:	200006b8 	.word	0x200006b8
+ 8003248:	200006bc 	.word	0x200006bc
 
 0800324c <HAL_GPIO_EXTI_Callback>:
 
@@ -8168,7 +8165,7 @@ void *_sbrk(ptrdiff_t incr)
  8003402:	bd80      	pop	{r7, pc}
  8003404:	20080000 	.word	0x20080000
  8003408:	00000400 	.word	0x00000400
- 800340c:	20000704 	.word	0x20000704
+ 800340c:	20000708 	.word	0x20000708
  8003410:	20005288 	.word	0x20005288
 
 08003414 <SystemInit>:
@@ -8325,7 +8322,7 @@ void MX_TIM3_Init(void)
  80034de:	3728      	adds	r7, #40	; 0x28
  80034e0:	46bd      	mov	sp, r7
  80034e2:	bd80      	pop	{r7, pc}
- 80034e4:	20000708 	.word	0x20000708
+ 80034e4:	2000070c 	.word	0x2000070c
  80034e8:	40000400 	.word	0x40000400
 
 080034ec <HAL_TIM_PWM_MspInit>:
@@ -8537,7 +8534,7 @@ LoopFillZerobss:
   ldr r2, =_sbss
  80035e4:	2000008c 	.word	0x2000008c
   ldr r4, =_ebss
- 80035e8:	20005284 	.word	0x20005284
+ 80035e8:	20005288 	.word	0x20005288
 
 080035ec <ADC_IRQHandler>:
  * @retval None       
@@ -8619,7 +8616,7 @@ __weak void HAL_IncTick(void)
  8003638:	4770      	bx	lr
  800363a:	bf00      	nop
  800363c:	20000028 	.word	0x20000028
- 8003640:	20000754 	.word	0x20000754
+ 8003640:	20000758 	.word	0x20000758
 
 08003644 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -8639,7 +8636,7 @@ __weak uint32_t HAL_GetTick(void)
  8003650:	f85d 7b04 	ldr.w	r7, [sp], #4
  8003654:	4770      	bx	lr
  8003656:	bf00      	nop
- 8003658:	20000754 	.word	0x20000754
+ 8003658:	20000758 	.word	0x20000758
 
 0800365c <HAL_Delay>:
   *       implementations in user file.
@@ -22156,7 +22153,7 @@ osStatus_t osKernelInitialize (void) {
  80084bc:	f85d 7b04 	ldr.w	r7, [sp], #4
  80084c0:	4770      	bx	lr
  80084c2:	bf00      	nop
- 80084c4:	20000758 	.word	0x20000758
+ 80084c4:	2000075c 	.word	0x2000075c
 
 080084c8 <osKernelStart>:
   }
@@ -22237,7 +22234,7 @@ osStatus_t osKernelStart (void) {
  800852a:	46bd      	mov	sp, r7
  800852c:	bd80      	pop	{r7, pc}
  800852e:	bf00      	nop
- 8008530:	20000758 	.word	0x20000758
+ 8008530:	2000075c 	.word	0x2000075c
 
 08008534 <osThreadNew>:
   return (configCPU_CLOCK_HZ);
@@ -22471,7 +22468,7 @@ osThreadId_t osThreadNew (osThreadFunc_t func, void *argument, const osThreadAtt
  8008676:	46bd      	mov	sp, r7
  8008678:	bd80      	pop	{r7, pc}
  800867a:	bf00      	nop
- 800867c:	20000758 	.word	0x20000758
+ 800867c:	2000075c 	.word	0x2000075c
 
 08008680 <osDelay>:
 
@@ -22540,7 +22537,7 @@ osStatus_t osDelay (uint32_t ticks) {
  80086d2:	46bd      	mov	sp, r7
  80086d4:	bd80      	pop	{r7, pc}
  80086d6:	bf00      	nop
- 80086d8:	20000758 	.word	0x20000758
+ 80086d8:	2000075c 	.word	0x2000075c
 
 080086dc <vApplicationGetIdleTaskMemory>:
 
@@ -22574,8 +22571,8 @@ void vApplicationGetIdleTaskMemory (StaticTask_t **ppxIdleTaskTCBBuffer, StackTy
  8008700:	f85d 7b04 	ldr.w	r7, [sp], #4
  8008704:	4770      	bx	lr
  8008706:	bf00      	nop
- 8008708:	2000075c 	.word	0x2000075c
- 800870c:	20000804 	.word	0x20000804
+ 8008708:	20000760 	.word	0x20000760
+ 800870c:	20000808 	.word	0x20000808
 
 08008710 <vApplicationGetTimerTaskMemory>:
 
@@ -22608,8 +22605,8 @@ void vApplicationGetTimerTaskMemory (StaticTask_t **ppxTimerTaskTCBBuffer, Stack
  8008734:	46bd      	mov	sp, r7
  8008736:	f85d 7b04 	ldr.w	r7, [sp], #4
  800873a:	4770      	bx	lr
- 800873c:	20000a04 	.word	0x20000a04
- 8008740:	20000aac 	.word	0x20000aac
+ 800873c:	20000a08 	.word	0x20000a08
+ 8008740:	20000ab0 	.word	0x20000ab0
 
 08008744 <vListInitialise>:
 /*-----------------------------------------------------------
@@ -24945,7 +24942,7 @@ BaseType_t xReturn;
  8009334:	f85d 7b04 	ldr.w	r7, [sp], #4
  8009338:	4770      	bx	lr
  800933a:	bf00      	nop
- 800933c:	20000eac 	.word	0x20000eac
+ 800933c:	20000eb0 	.word	0x20000eb0
 
 08009340 <vQueueWaitForMessageRestricted>:
 /*-----------------------------------------------------------*/
@@ -25541,9 +25538,9 @@ BaseType_t xReturn;
  8009636:	3720      	adds	r7, #32
  8009638:	46bd      	mov	sp, r7
  800963a:	bd80      	pop	{r7, pc}
- 800963c:	20005140 	.word	0x20005140
- 8009640:	200051a8 	.word	0x200051a8
- 8009644:	20005210 	.word	0x20005210
+ 800963c:	20005144 	.word	0x20005144
+ 8009640:	200051ac 	.word	0x200051ac
+ 8009644:	20005214 	.word	0x20005214
 
 08009648 <prvAddNewTaskToReadyList>:
 /*-----------------------------------------------------------*/
@@ -25702,12 +25699,12 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
  8009706:	46bd      	mov	sp, r7
  8009708:	bd80      	pop	{r7, pc}
  800970a:	bf00      	nop
- 800970c:	200013c0 	.word	0x200013c0
- 8009710:	20000eec 	.word	0x20000eec
- 8009714:	200013cc 	.word	0x200013cc
- 8009718:	200013dc 	.word	0x200013dc
- 800971c:	200013c8 	.word	0x200013c8
- 8009720:	20000ef0 	.word	0x20000ef0
+ 800970c:	200013c4 	.word	0x200013c4
+ 8009710:	20000ef0 	.word	0x20000ef0
+ 8009714:	200013d0 	.word	0x200013d0
+ 8009718:	200013e0 	.word	0x200013e0
+ 800971c:	200013cc 	.word	0x200013cc
+ 8009720:	20000ef4 	.word	0x20000ef4
  8009724:	e000ed04 	.word	0xe000ed04
 
 08009728 <vTaskDelay>:
@@ -25788,7 +25785,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
  8009786:	3710      	adds	r7, #16
  8009788:	46bd      	mov	sp, r7
  800978a:	bd80      	pop	{r7, pc}
- 800978c:	200013e8 	.word	0x200013e8
+ 800978c:	200013ec 	.word	0x200013ec
  8009790:	e000ed04 	.word	0xe000ed04
 
 08009794 <vTaskStartScheduler>:
@@ -25954,12 +25951,12 @@ BaseType_t xReturn;
  800985a:	bf00      	nop
  800985c:	0800c248 	.word	0x0800c248
  8009860:	08009ec1 	.word	0x08009ec1
- 8009864:	200013e4 	.word	0x200013e4
- 8009868:	20000eec 	.word	0x20000eec
+ 8009864:	200013e8 	.word	0x200013e8
+ 8009868:	20000ef0 	.word	0x20000ef0
  800986c:	20000088 	.word	0x20000088
- 8009870:	200013e0 	.word	0x200013e0
- 8009874:	200013cc 	.word	0x200013cc
- 8009878:	200013c4 	.word	0x200013c4
+ 8009870:	200013e4 	.word	0x200013e4
+ 8009874:	200013d0 	.word	0x200013d0
+ 8009878:	200013c8 	.word	0x200013c8
 
 0800987c <vTaskSuspendAll>:
 	vPortEndScheduler();
@@ -25986,7 +25983,7 @@ void vTaskSuspendAll( void )
  800988c:	46bd      	mov	sp, r7
  800988e:	f85d 7b04 	ldr.w	r7, [sp], #4
  8009892:	4770      	bx	lr
- 8009894:	200013e8 	.word	0x200013e8
+ 8009894:	200013ec 	.word	0x200013ec
 
 08009898 <xTaskResumeAll>:
 
@@ -26216,14 +26213,14 @@ BaseType_t xAlreadyYielded = pdFALSE;
  80099ae:	46bd      	mov	sp, r7
  80099b0:	bd80      	pop	{r7, pc}
  80099b2:	bf00      	nop
- 80099b4:	200013e8 	.word	0x200013e8
- 80099b8:	200013c0 	.word	0x200013c0
- 80099bc:	20001380 	.word	0x20001380
- 80099c0:	200013c8 	.word	0x200013c8
- 80099c4:	20000ef0 	.word	0x20000ef0
- 80099c8:	20000eec 	.word	0x20000eec
- 80099cc:	200013d4 	.word	0x200013d4
- 80099d0:	200013d0 	.word	0x200013d0
+ 80099b4:	200013ec 	.word	0x200013ec
+ 80099b8:	200013c4 	.word	0x200013c4
+ 80099bc:	20001384 	.word	0x20001384
+ 80099c0:	200013cc 	.word	0x200013cc
+ 80099c4:	20000ef4 	.word	0x20000ef4
+ 80099c8:	20000ef0 	.word	0x20000ef0
+ 80099cc:	200013d8 	.word	0x200013d8
+ 80099d0:	200013d4 	.word	0x200013d4
  80099d4:	e000ed04 	.word	0xe000ed04
 
 080099d8 <xTaskGetTickCount>:
@@ -26255,7 +26252,7 @@ TickType_t xTicks;
  80099ec:	f85d 7b04 	ldr.w	r7, [sp], #4
  80099f0:	4770      	bx	lr
  80099f2:	bf00      	nop
- 80099f4:	200013c4 	.word	0x200013c4
+ 80099f4:	200013c8 	.word	0x200013c8
 
 080099f8 <xTaskIncrementTick>:
 
@@ -26532,17 +26529,17 @@ BaseType_t xSwitchRequired = pdFALSE;
  8009b3e:	46bd      	mov	sp, r7
  8009b40:	bd80      	pop	{r7, pc}
  8009b42:	bf00      	nop
- 8009b44:	200013e8 	.word	0x200013e8
- 8009b48:	200013c4 	.word	0x200013c4
- 8009b4c:	20001378 	.word	0x20001378
- 8009b50:	2000137c 	.word	0x2000137c
- 8009b54:	200013d8 	.word	0x200013d8
- 8009b58:	200013e0 	.word	0x200013e0
- 8009b5c:	200013c8 	.word	0x200013c8
- 8009b60:	20000ef0 	.word	0x20000ef0
- 8009b64:	20000eec 	.word	0x20000eec
- 8009b68:	200013d0 	.word	0x200013d0
- 8009b6c:	200013d4 	.word	0x200013d4
+ 8009b44:	200013ec 	.word	0x200013ec
+ 8009b48:	200013c8 	.word	0x200013c8
+ 8009b4c:	2000137c 	.word	0x2000137c
+ 8009b50:	20001380 	.word	0x20001380
+ 8009b54:	200013dc 	.word	0x200013dc
+ 8009b58:	200013e4 	.word	0x200013e4
+ 8009b5c:	200013cc 	.word	0x200013cc
+ 8009b60:	20000ef4 	.word	0x20000ef4
+ 8009b64:	20000ef0 	.word	0x20000ef0
+ 8009b68:	200013d4 	.word	0x200013d4
+ 8009b6c:	200013d8 	.word	0x200013d8
 
 08009b70 <vTaskSwitchContext>:
 
@@ -26653,11 +26650,11 @@ void vTaskSwitchContext( void )
  8009c1c:	46bd      	mov	sp, r7
  8009c1e:	f85d 7b04 	ldr.w	r7, [sp], #4
  8009c22:	4770      	bx	lr
- 8009c24:	200013e8 	.word	0x200013e8
- 8009c28:	200013d4 	.word	0x200013d4
- 8009c2c:	200013c8 	.word	0x200013c8
- 8009c30:	20000ef0 	.word	0x20000ef0
- 8009c34:	20000eec 	.word	0x20000eec
+ 8009c24:	200013ec 	.word	0x200013ec
+ 8009c28:	200013d8 	.word	0x200013d8
+ 8009c2c:	200013cc 	.word	0x200013cc
+ 8009c30:	20000ef4 	.word	0x20000ef4
+ 8009c34:	20000ef0 	.word	0x20000ef0
  8009c38:	20000088 	.word	0x20000088
 
 08009c3c <vTaskPlaceOnEventList>:
@@ -26707,7 +26704,7 @@ void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksT
  8009c7e:	3710      	adds	r7, #16
  8009c80:	46bd      	mov	sp, r7
  8009c82:	bd80      	pop	{r7, pc}
- 8009c84:	20000eec 	.word	0x20000eec
+ 8009c84:	20000ef0 	.word	0x20000ef0
 
 08009c88 <vTaskPlaceOnEventListRestricted>:
 /*-----------------------------------------------------------*/
@@ -26774,7 +26771,7 @@ void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksT
  8009cda:	46bd      	mov	sp, r7
  8009cdc:	bd80      	pop	{r7, pc}
  8009cde:	bf00      	nop
- 8009ce0:	20000eec 	.word	0x20000eec
+ 8009ce0:	20000ef0 	.word	0x20000ef0
 
 08009ce4 <xTaskRemoveFromEventList>:
 
@@ -26906,12 +26903,12 @@ BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList )
  8009d92:	46bd      	mov	sp, r7
  8009d94:	bd80      	pop	{r7, pc}
  8009d96:	bf00      	nop
- 8009d98:	200013e8 	.word	0x200013e8
- 8009d9c:	200013c8 	.word	0x200013c8
- 8009da0:	20000ef0 	.word	0x20000ef0
- 8009da4:	20001380 	.word	0x20001380
- 8009da8:	20000eec 	.word	0x20000eec
- 8009dac:	200013d4 	.word	0x200013d4
+ 8009d98:	200013ec 	.word	0x200013ec
+ 8009d9c:	200013cc 	.word	0x200013cc
+ 8009da0:	20000ef4 	.word	0x20000ef4
+ 8009da4:	20001384 	.word	0x20001384
+ 8009da8:	20000ef0 	.word	0x20000ef0
+ 8009dac:	200013d8 	.word	0x200013d8
 
 08009db0 <vTaskInternalSetTimeOutState>:
 	taskEXIT_CRITICAL();
@@ -26941,8 +26938,8 @@ void vTaskInternalSetTimeOutState( TimeOut_t * const pxTimeOut )
  8009dcc:	46bd      	mov	sp, r7
  8009dce:	f85d 7b04 	ldr.w	r7, [sp], #4
  8009dd2:	4770      	bx	lr
- 8009dd4:	200013d8 	.word	0x200013d8
- 8009dd8:	200013c4 	.word	0x200013c4
+ 8009dd4:	200013dc 	.word	0x200013dc
+ 8009dd8:	200013c8 	.word	0x200013c8
 
 08009ddc <xTaskCheckForTimeOut>:
 /*-----------------------------------------------------------*/
@@ -27089,8 +27086,8 @@ BaseType_t xReturn;
  8009e9a:	3720      	adds	r7, #32
  8009e9c:	46bd      	mov	sp, r7
  8009e9e:	bd80      	pop	{r7, pc}
- 8009ea0:	200013c4 	.word	0x200013c4
- 8009ea4:	200013d8 	.word	0x200013d8
+ 8009ea0:	200013c8 	.word	0x200013c8
+ 8009ea4:	200013dc 	.word	0x200013dc
 
 08009ea8 <vTaskMissedYield>:
 /*-----------------------------------------------------------*/
@@ -27108,7 +27105,7 @@ void vTaskMissedYield( void )
  8009eb4:	46bd      	mov	sp, r7
  8009eb6:	f85d 7b04 	ldr.w	r7, [sp], #4
  8009eba:	4770      	bx	lr
- 8009ebc:	200013d4 	.word	0x200013d4
+ 8009ebc:	200013d8 	.word	0x200013d8
 
 08009ec0 <prvIdleTask>:
  *
@@ -27148,7 +27145,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 		prvCheckTasksWaitingTermination();
  8009ee4:	e7f0      	b.n	8009ec8 <prvIdleTask+0x8>
  8009ee6:	bf00      	nop
- 8009ee8:	20000ef0 	.word	0x20000ef0
+ 8009ee8:	20000ef4 	.word	0x20000ef4
  8009eec:	e000ed04 	.word	0xe000ed04
 
 08009ef0 <prvInitialiseTaskLists>:
@@ -27229,14 +27226,14 @@ UBaseType_t uxPriority;
  8009f4a:	46bd      	mov	sp, r7
  8009f4c:	bd80      	pop	{r7, pc}
  8009f4e:	bf00      	nop
- 8009f50:	20000ef0 	.word	0x20000ef0
- 8009f54:	20001350 	.word	0x20001350
- 8009f58:	20001364 	.word	0x20001364
- 8009f5c:	20001380 	.word	0x20001380
- 8009f60:	20001394 	.word	0x20001394
- 8009f64:	200013ac 	.word	0x200013ac
- 8009f68:	20001378 	.word	0x20001378
- 8009f6c:	2000137c 	.word	0x2000137c
+ 8009f50:	20000ef4 	.word	0x20000ef4
+ 8009f54:	20001354 	.word	0x20001354
+ 8009f58:	20001368 	.word	0x20001368
+ 8009f5c:	20001384 	.word	0x20001384
+ 8009f60:	20001398 	.word	0x20001398
+ 8009f64:	200013b0 	.word	0x200013b0
+ 8009f68:	2000137c 	.word	0x2000137c
+ 8009f6c:	20001380 	.word	0x20001380
 
 08009f70 <prvCheckTasksWaitingTermination>:
 /*-----------------------------------------------------------*/
@@ -27301,9 +27298,9 @@ static void prvCheckTasksWaitingTermination( void )
  8009fba:	46bd      	mov	sp, r7
  8009fbc:	bd80      	pop	{r7, pc}
  8009fbe:	bf00      	nop
- 8009fc0:	20001394 	.word	0x20001394
- 8009fc4:	200013c0 	.word	0x200013c0
- 8009fc8:	200013a8 	.word	0x200013a8
+ 8009fc0:	20001398 	.word	0x20001398
+ 8009fc4:	200013c4 	.word	0x200013c4
+ 8009fc8:	200013ac 	.word	0x200013ac
 
 08009fcc <prvDeleteTCB>:
 /*-----------------------------------------------------------*/
@@ -27437,8 +27434,8 @@ TCB_t *pxTCB;
  800a068:	46bd      	mov	sp, r7
  800a06a:	f85d 7b04 	ldr.w	r7, [sp], #4
  800a06e:	4770      	bx	lr
- 800a070:	20001378 	.word	0x20001378
- 800a074:	200013e0 	.word	0x200013e0
+ 800a070:	2000137c 	.word	0x2000137c
+ 800a074:	200013e4 	.word	0x200013e4
 
 0800a078 <xTaskGetSchedulerState>:
 /*-----------------------------------------------------------*/
@@ -27492,8 +27489,8 @@ TCB_t *pxTCB;
  800a0a4:	46bd      	mov	sp, r7
  800a0a6:	f85d 7b04 	ldr.w	r7, [sp], #4
  800a0aa:	4770      	bx	lr
- 800a0ac:	200013cc 	.word	0x200013cc
- 800a0b0:	200013e8 	.word	0x200013e8
+ 800a0ac:	200013d0 	.word	0x200013d0
+ 800a0b0:	200013ec 	.word	0x200013ec
 
 0800a0b4 <xTaskPriorityDisinherit>:
 /*-----------------------------------------------------------*/
@@ -27653,9 +27650,9 @@ TCB_t *pxTCB;
  800a186:	46bd      	mov	sp, r7
  800a188:	bd80      	pop	{r7, pc}
  800a18a:	bf00      	nop
- 800a18c:	20000eec 	.word	0x20000eec
- 800a190:	200013c8 	.word	0x200013c8
- 800a194:	20000ef0 	.word	0x20000ef0
+ 800a18c:	20000ef0 	.word	0x20000ef0
+ 800a190:	200013cc 	.word	0x200013cc
+ 800a194:	20000ef4 	.word	0x20000ef4
 
 0800a198 <prvAddCurrentTaskToDelayedList>:
 	}
@@ -27765,12 +27762,12 @@ const TickType_t xConstTickCount = xTickCount;
  800a222:	3710      	adds	r7, #16
  800a224:	46bd      	mov	sp, r7
  800a226:	bd80      	pop	{r7, pc}
- 800a228:	200013c4 	.word	0x200013c4
- 800a22c:	20000eec 	.word	0x20000eec
- 800a230:	200013ac 	.word	0x200013ac
- 800a234:	2000137c 	.word	0x2000137c
- 800a238:	20001378 	.word	0x20001378
- 800a23c:	200013e0 	.word	0x200013e0
+ 800a228:	200013c8 	.word	0x200013c8
+ 800a22c:	20000ef0 	.word	0x20000ef0
+ 800a230:	200013b0 	.word	0x200013b0
+ 800a234:	20001380 	.word	0x20001380
+ 800a238:	2000137c 	.word	0x2000137c
+ 800a23c:	200013e4 	.word	0x200013e4
 
 0800a240 <xTimerCreateTimerTask>:
 									TimerCallbackFunction_t pxCallbackFunction,
@@ -27872,10 +27869,10 @@ BaseType_t xReturn = pdFAIL;
  800a2be:	3718      	adds	r7, #24
  800a2c0:	46bd      	mov	sp, r7
  800a2c2:	bd80      	pop	{r7, pc}
- 800a2c4:	2000141c 	.word	0x2000141c
+ 800a2c4:	20001420 	.word	0x20001420
  800a2c8:	0800c250 	.word	0x0800c250
  800a2cc:	0800a411 	.word	0x0800a411
- 800a2d0:	20001420 	.word	0x20001420
+ 800a2d0:	20001424 	.word	0x20001424
 
 0800a2d4 <xTimerGenericCommand>:
 	}
@@ -27988,7 +27985,7 @@ DaemonTaskMessage_t xMessage;
  800a36a:	46bd      	mov	sp, r7
  800a36c:	bd80      	pop	{r7, pc}
  800a36e:	bf00      	nop
- 800a370:	2000141c 	.word	0x2000141c
+ 800a370:	20001420 	.word	0x20001420
 
 0800a374 <prvProcessExpiredTimer>:
 	return pxTimer->pcTimerName;
@@ -28096,7 +28093,7 @@ Timer_t * const pxTimer = ( Timer_t * ) listGET_OWNER_OF_HEAD_ENTRY( pxCurrentTi
  800a406:	3718      	adds	r7, #24
  800a408:	46bd      	mov	sp, r7
  800a40a:	bd80      	pop	{r7, pc}
- 800a40c:	20001414 	.word	0x20001414
+ 800a40c:	20001418 	.word	0x20001418
 
 0800a410 <prvTimerTask>:
 /*-----------------------------------------------------------*/
@@ -28231,8 +28228,8 @@ BaseType_t xTimerListsWereSwitched;
  800a4be:	46bd      	mov	sp, r7
  800a4c0:	bd80      	pop	{r7, pc}
  800a4c2:	bf00      	nop
- 800a4c4:	20001418 	.word	0x20001418
- 800a4c8:	2000141c 	.word	0x2000141c
+ 800a4c4:	2000141c 	.word	0x2000141c
+ 800a4c8:	20001420 	.word	0x20001420
  800a4cc:	e000ed04 	.word	0xe000ed04
 
 0800a4d0 <prvGetNextExpireTime>:
@@ -28291,7 +28288,7 @@ static TickType_t prvGetNextExpireTime( BaseType_t * const pxListWasEmpty )
  800a50c:	f85d 7b04 	ldr.w	r7, [sp], #4
  800a510:	4770      	bx	lr
  800a512:	bf00      	nop
- 800a514:	20001414 	.word	0x20001414
+ 800a514:	20001418 	.word	0x20001418
 
 0800a518 <prvSampleTimeNow>:
 /*-----------------------------------------------------------*/
@@ -28345,7 +28342,7 @@ PRIVILEGED_DATA static TickType_t xLastTime = ( TickType_t ) 0U; /*lint !e956 Va
  800a54e:	46bd      	mov	sp, r7
  800a550:	bd80      	pop	{r7, pc}
  800a552:	bf00      	nop
- 800a554:	20001424 	.word	0x20001424
+ 800a554:	20001428 	.word	0x20001428
 
 0800a558 <prvInsertTimerInActiveList>:
 /*-----------------------------------------------------------*/
@@ -28449,8 +28446,8 @@ BaseType_t xProcessTimerNow = pdFALSE;
  800a5ce:	3718      	adds	r7, #24
  800a5d0:	46bd      	mov	sp, r7
  800a5d2:	bd80      	pop	{r7, pc}
- 800a5d4:	20001418 	.word	0x20001418
- 800a5d8:	20001414 	.word	0x20001414
+ 800a5d4:	2000141c 	.word	0x2000141c
+ 800a5d8:	20001418 	.word	0x20001418
 
 0800a5dc <prvProcessReceivedCommands>:
 /*-----------------------------------------------------------*/
@@ -28752,7 +28749,7 @@ TickType_t xTimeNow;
  800a7a2:	46bd      	mov	sp, r7
  800a7a4:	bd80      	pop	{r7, pc}
  800a7a6:	bf00      	nop
- 800a7a8:	2000141c 	.word	0x2000141c
+ 800a7a8:	20001420 	.word	0x20001420
 
 0800a7ac <prvSwitchTimerLists>:
 /*-----------------------------------------------------------*/
@@ -28896,8 +28893,8 @@ static void prvSwitchTimerLists( void )
  800a86a:	3718      	adds	r7, #24
  800a86c:	46bd      	mov	sp, r7
  800a86e:	bd80      	pop	{r7, pc}
- 800a870:	20001414 	.word	0x20001414
- 800a874:	20001418 	.word	0x20001418
+ 800a870:	20001418 	.word	0x20001418
+ 800a874:	2000141c 	.word	0x2000141c
 
 0800a878 <prvCheckForValidListAndQueue>:
 /*-----------------------------------------------------------*/
@@ -28978,13 +28975,13 @@ static void prvCheckForValidListAndQueue( void )
  800a8d2:	46bd      	mov	sp, r7
  800a8d4:	bd80      	pop	{r7, pc}
  800a8d6:	bf00      	nop
- 800a8d8:	2000141c 	.word	0x2000141c
- 800a8dc:	200013ec 	.word	0x200013ec
- 800a8e0:	20001400 	.word	0x20001400
- 800a8e4:	20001414 	.word	0x20001414
- 800a8e8:	20001418 	.word	0x20001418
- 800a8ec:	200014c8 	.word	0x200014c8
- 800a8f0:	20001428 	.word	0x20001428
+ 800a8d8:	20001420 	.word	0x20001420
+ 800a8dc:	200013f0 	.word	0x200013f0
+ 800a8e0:	20001404 	.word	0x20001404
+ 800a8e4:	20001418 	.word	0x20001418
+ 800a8e8:	2000141c 	.word	0x2000141c
+ 800a8ec:	200014cc 	.word	0x200014cc
+ 800a8f0:	2000142c 	.word	0x2000142c
  800a8f4:	0800c258 	.word	0x0800c258
 
 0800a8f8 <pxPortInitialiseStack>:
@@ -29148,7 +29145,7 @@ void vPortSVCHandler( void )
  800a9dc:	f3af 8000 	nop.w
 
 0800a9e0 <pxCurrentTCBConst2>:
- 800a9e0:	20000eec 	.word	0x20000eec
+ 800a9e0:	20000ef0 	.word	0x20000ef0
 					"	bx r14							\n"
 					"									\n"
 					"	.align 4						\n"
@@ -29375,8 +29372,8 @@ BaseType_t xPortStartScheduler( void )
  800aaf0:	bd80      	pop	{r7, pc}
  800aaf2:	bf00      	nop
  800aaf4:	e000e400 	.word	0xe000e400
- 800aaf8:	20001518 	.word	0x20001518
- 800aafc:	2000151c 	.word	0x2000151c
+ 800aaf8:	2000151c 	.word	0x2000151c
+ 800aafc:	20001520 	.word	0x20001520
  800ab00:	e000ed20 	.word	0xe000ed20
  800ab04:	2000002c 	.word	0x2000002c
  800ab08:	e000ef34 	.word	0xe000ef34
@@ -29540,7 +29537,7 @@ void xPortPendSVHandler( void )
  800ac2e:	bf00      	nop
 
 0800ac30 <pxCurrentTCBConst>:
- 800ac30:	20000eec 	.word	0x20000eec
+ 800ac30:	20000ef0 	.word	0x20000ef0
 	"										\n"
 	"	.align 4							\n"
 	"pxCurrentTCBConst: .word pxCurrentTCB	\n"
@@ -29757,9 +29754,9 @@ static void vPortEnableVFP( void )
  800ad50:	4770      	bx	lr
  800ad52:	bf00      	nop
  800ad54:	e000e3f0 	.word	0xe000e3f0
- 800ad58:	20001518 	.word	0x20001518
+ 800ad58:	2000151c 	.word	0x2000151c
  800ad5c:	e000ed0c 	.word	0xe000ed0c
- 800ad60:	2000151c 	.word	0x2000151c
+ 800ad60:	20001520 	.word	0x20001520
 
 0800ad64 <pvPortMalloc>:
 static size_t xBlockAllocatedBit = 0;
@@ -30053,11 +30050,11 @@ void *pvReturn = NULL;
  800aede:	3728      	adds	r7, #40	; 0x28
  800aee0:	46bd      	mov	sp, r7
  800aee2:	bd80      	pop	{r7, pc}
- 800aee4:	20005128 	.word	0x20005128
- 800aee8:	20005134 	.word	0x20005134
- 800aeec:	2000512c 	.word	0x2000512c
- 800aef0:	20005120 	.word	0x20005120
- 800aef4:	20005130 	.word	0x20005130
+ 800aee4:	2000512c 	.word	0x2000512c
+ 800aee8:	20005138 	.word	0x20005138
+ 800aeec:	20005130 	.word	0x20005130
+ 800aef0:	20005124 	.word	0x20005124
+ 800aef4:	20005134 	.word	0x20005134
 
 0800aef8 <vPortFree>:
 /*-----------------------------------------------------------*/
@@ -30185,8 +30182,8 @@ BlockLink_t *pxLink;
  800afa6:	3718      	adds	r7, #24
  800afa8:	46bd      	mov	sp, r7
  800afaa:	bd80      	pop	{r7, pc}
- 800afac:	20005134 	.word	0x20005134
- 800afb0:	2000512c 	.word	0x2000512c
+ 800afac:	20005138 	.word	0x20005138
+ 800afb0:	20005130 	.word	0x20005130
 
 0800afb4 <prvHeapInit>:
 	/* This just exists to keep the linker quiet. */
@@ -30319,12 +30316,12 @@ size_t xTotalHeapSize = configTOTAL_HEAP_SIZE;
  800b058:	46bd      	mov	sp, r7
  800b05a:	f85d 7b04 	ldr.w	r7, [sp], #4
  800b05e:	4770      	bx	lr
- 800b060:	20001520 	.word	0x20001520
- 800b064:	20005120 	.word	0x20005120
- 800b068:	20005128 	.word	0x20005128
- 800b06c:	20005130 	.word	0x20005130
- 800b070:	2000512c 	.word	0x2000512c
- 800b074:	20005134 	.word	0x20005134
+ 800b060:	20001524 	.word	0x20001524
+ 800b064:	20005124 	.word	0x20005124
+ 800b068:	2000512c 	.word	0x2000512c
+ 800b06c:	20005134 	.word	0x20005134
+ 800b070:	20005130 	.word	0x20005130
+ 800b074:	20005138 	.word	0x20005138
 
 0800b078 <prvInsertBlockIntoFreeList>:
 /*-----------------------------------------------------------*/
@@ -30468,8 +30465,8 @@ uint8_t *puc;
  800b11c:	f85d 7b04 	ldr.w	r7, [sp], #4
  800b120:	4770      	bx	lr
  800b122:	bf00      	nop
- 800b124:	20005120 	.word	0x20005120
- 800b128:	20005128 	.word	0x20005128
+ 800b124:	20005124 	.word	0x20005124
+ 800b128:	2000512c 	.word	0x2000512c
 
 0800b12c <malloc>:
  800b12c:	4b02      	ldr	r3, [pc, #8]	; (800b138 <malloc+0xc>)
@@ -30505,7 +30502,7 @@ uint8_t *puc;
  800b170:	f04f 34ff 	mov.w	r4, #4294967295	; 0xffffffff
  800b174:	4620      	mov	r0, r4
  800b176:	bd70      	pop	{r4, r5, r6, pc}
- 800b178:	2000513c 	.word	0x2000513c
+ 800b178:	20005140 	.word	0x20005140
 
 0800b17c <_malloc_r>:
  800b17c:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -30616,19 +30613,19 @@ uint8_t *puc;
  800b272:	605b      	str	r3, [r3, #4]
  800b274:	deff      	udf	#255	; 0xff
  800b276:	bf00      	nop
- 800b278:	20005138 	.word	0x20005138
+ 800b278:	2000513c 	.word	0x2000513c
 
 0800b27c <__malloc_lock>:
  800b27c:	4801      	ldr	r0, [pc, #4]	; (800b284 <__malloc_lock+0x8>)
  800b27e:	f000 b9a2 	b.w	800b5c6 <__retarget_lock_acquire_recursive>
  800b282:	bf00      	nop
- 800b284:	20005280 	.word	0x20005280
+ 800b284:	20005284 	.word	0x20005284
 
 0800b288 <__malloc_unlock>:
  800b288:	4801      	ldr	r0, [pc, #4]	; (800b290 <__malloc_unlock+0x8>)
  800b28a:	f000 b99d 	b.w	800b5c8 <__retarget_lock_release_recursive>
  800b28e:	bf00      	nop
- 800b290:	20005280 	.word	0x20005280
+ 800b290:	20005284 	.word	0x20005284
 
 0800b294 <rand>:
  800b294:	4b16      	ldr	r3, [pc, #88]	; (800b2f0 <rand+0x5c>)
@@ -30719,7 +30716,7 @@ uint8_t *puc;
  800b36c:	0800b83b 	.word	0x0800b83b
  800b370:	0800b873 	.word	0x0800b873
  800b374:	0800b897 	.word	0x0800b897
- 800b378:	20005140 	.word	0x20005140
+ 800b378:	20005144 	.word	0x20005144
 
 0800b37c <stdio_exit_handler>:
  800b37c:	4a02      	ldr	r2, [pc, #8]	; (800b388 <stdio_exit_handler+0xc>)
@@ -30754,9 +30751,9 @@ uint8_t *puc;
  800b3c0:	f000 ba02 	b.w	800b7c8 <_fflush_r>
  800b3c4:	bd10      	pop	{r4, pc}
  800b3c6:	bf00      	nop
- 800b3c8:	20005140 	.word	0x20005140
- 800b3cc:	200051a8 	.word	0x200051a8
- 800b3d0:	20005210 	.word	0x20005210
+ 800b3c8:	20005144 	.word	0x20005144
+ 800b3cc:	200051ac 	.word	0x200051ac
+ 800b3d0:	20005214 	.word	0x20005214
 
 0800b3d4 <global_stdio_init.part.0>:
  800b3d4:	b510      	push	{r4, lr}
@@ -30777,21 +30774,21 @@ uint8_t *puc;
  800b3fa:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
  800b3fe:	2112      	movs	r1, #18
  800b400:	f7ff bf86 	b.w	800b310 <std>
- 800b404:	20005278 	.word	0x20005278
- 800b408:	20005140 	.word	0x20005140
+ 800b404:	2000527c 	.word	0x2000527c
+ 800b408:	20005144 	.word	0x20005144
  800b40c:	0800b37d 	.word	0x0800b37d
 
 0800b410 <__sfp_lock_acquire>:
  800b410:	4801      	ldr	r0, [pc, #4]	; (800b418 <__sfp_lock_acquire+0x8>)
  800b412:	f000 b8d8 	b.w	800b5c6 <__retarget_lock_acquire_recursive>
  800b416:	bf00      	nop
- 800b418:	20005281 	.word	0x20005281
+ 800b418:	20005285 	.word	0x20005285
 
 0800b41c <__sfp_lock_release>:
  800b41c:	4801      	ldr	r0, [pc, #4]	; (800b424 <__sfp_lock_release+0x8>)
  800b41e:	f000 b8d3 	b.w	800b5c8 <__retarget_lock_release_recursive>
  800b422:	bf00      	nop
- 800b424:	20005281 	.word	0x20005281
+ 800b424:	20005285 	.word	0x20005285
 
 0800b428 <__sinit>:
  800b428:	b510      	push	{r4, lr}
@@ -30811,7 +30808,7 @@ uint8_t *puc;
  800b44c:	e7f2      	b.n	800b434 <__sinit+0xc>
  800b44e:	bf00      	nop
  800b450:	0800b395 	.word	0x0800b395
- 800b454:	20005278 	.word	0x20005278
+ 800b454:	2000527c 	.word	0x2000527c
 
 0800b458 <_fwalk_sglue>:
  800b458:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -30938,7 +30935,7 @@ uint8_t *puc;
  800b566:	b103      	cbz	r3, 800b56a <_sbrk_r+0x1a>
  800b568:	6023      	str	r3, [r4, #0]
  800b56a:	bd38      	pop	{r3, r4, r5, pc}
- 800b56c:	2000527c 	.word	0x2000527c
+ 800b56c:	20005280 	.word	0x20005280
 
 0800b570 <__errno>:
  800b570:	4b01      	ldr	r3, [pc, #4]	; (800b578 <__errno+0x8>)
@@ -31096,7 +31093,7 @@ uint8_t *puc;
  800b6b2:	e7ca      	b.n	800b64a <_free_r+0x26>
  800b6b4:	b003      	add	sp, #12
  800b6b6:	bd30      	pop	{r4, r5, pc}
- 800b6b8:	20005138 	.word	0x20005138
+ 800b6b8:	2000513c 	.word	0x2000513c
 
 0800b6bc <__sflush_r>:
  800b6bc:	898a      	ldrh	r2, [r1, #12]
@@ -31349,7 +31346,7 @@ uint8_t *puc;
  800b8da:	b103      	cbz	r3, 800b8de <_close_r+0x1a>
  800b8dc:	6023      	str	r3, [r4, #0]
  800b8de:	bd38      	pop	{r3, r4, r5, pc}
- 800b8e0:	2000527c 	.word	0x2000527c
+ 800b8e0:	20005280 	.word	0x20005280
 
 0800b8e4 <_lseek_r>:
  800b8e4:	b538      	push	{r3, r4, r5, lr}
@@ -31367,7 +31364,7 @@ uint8_t *puc;
  800b8fe:	b103      	cbz	r3, 800b902 <_lseek_r+0x1e>
  800b900:	6023      	str	r3, [r4, #0]
  800b902:	bd38      	pop	{r3, r4, r5, pc}
- 800b904:	2000527c 	.word	0x2000527c
+ 800b904:	20005280 	.word	0x20005280
 
 0800b908 <_read_r>:
  800b908:	b538      	push	{r3, r4, r5, lr}
@@ -31385,7 +31382,7 @@ uint8_t *puc;
  800b922:	b103      	cbz	r3, 800b926 <_read_r+0x1e>
  800b924:	6023      	str	r3, [r4, #0]
  800b926:	bd38      	pop	{r3, r4, r5, pc}
- 800b928:	2000527c 	.word	0x2000527c
+ 800b928:	20005280 	.word	0x20005280
 
 0800b92c <_write_r>:
  800b92c:	b538      	push	{r3, r4, r5, lr}
@@ -31403,7 +31400,7 @@ uint8_t *puc;
  800b946:	b103      	cbz	r3, 800b94a <_write_r+0x1e>
  800b948:	6023      	str	r3, [r4, #0]
  800b94a:	bd38      	pop	{r3, r4, r5, pc}
- 800b94c:	2000527c 	.word	0x2000527c
+ 800b94c:	20005280 	.word	0x20005280
 
 0800b950 <abort>:
  800b950:	b508      	push	{r3, lr}
@@ -32250,7 +32247,7 @@ uint8_t *puc;
  800c10e:	6023      	str	r3, [r4, #0]
  800c110:	bd38      	pop	{r3, r4, r5, pc}
  800c112:	bf00      	nop
- 800c114:	2000527c 	.word	0x2000527c
+ 800c114:	20005280 	.word	0x20005280
 
 0800c118 <_isatty_r>:
  800c118:	b538      	push	{r3, r4, r5, lr}
@@ -32266,7 +32263,7 @@ uint8_t *puc;
  800c12e:	b103      	cbz	r3, 800c132 <_isatty_r+0x1a>
  800c130:	6023      	str	r3, [r4, #0]
  800c132:	bd38      	pop	{r3, r4, r5, pc}
- 800c134:	2000527c 	.word	0x2000527c
+ 800c134:	20005280 	.word	0x20005280
 
 0800c138 <_raise_r>:
  800c138:	291f      	cmp	r1, #31
@@ -32328,7 +32325,7 @@ uint8_t *puc;
  800c1b2:	6023      	str	r3, [r4, #0]
  800c1b4:	bd38      	pop	{r3, r4, r5, pc}
  800c1b6:	bf00      	nop
- 800c1b8:	2000527c 	.word	0x2000527c
+ 800c1b8:	20005280 	.word	0x20005280
 
 0800c1bc <_getpid_r>:
  800c1bc:	f7f7 b864 	b.w	8003288 <_getpid>

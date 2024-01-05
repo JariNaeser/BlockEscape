@@ -22,6 +22,8 @@
 #define Y_AXIS_ELEMENTS DISP_Y_SIZE / CUBE_SIDE_LEN
 #define MOVE_INTERVAL 500
 #define SPAWN_PERCENTAGE 4
+#define X_AXIS_CENTER X_AXIS_ELEMENTS / 2
+#define Y_AXIS_CENTER Y_AXIS_ELEMENTS / 2
 
 /* Private data types definition ---------------------------------------------*/
 
@@ -38,6 +40,7 @@ enum Direction currentDirection;
 bool matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS];
 int startGame;
 bool showInitialDelay = true;
+bool gameFinished = false;
 
 static TaskHandle_t task_draw_handle;		//Touchscreen Task Handle
 static TaskHandle_t task_readJoystick_handle;		//Touchscreen Task Handle
@@ -94,68 +97,92 @@ void task_readJoystick_fct( void *pvParameters ){
 	while(showInitialDelay) vTaskDelay(pdMS_TO_TICKS(10));
 
 	while(1){
-		enum Direction newDirection = readJoystick();
+		if(gameFinished){
+			vTaskDelay(pdMS_TO_TICKS(1000));
+		}else{
+			enum Direction newDirection = readJoystick();
 
-		if(newDirection != IDLE){
-			currentDirection = newDirection;
+			if(newDirection != IDLE) currentDirection = newDirection;
+
+			move_and_compute_new_grid(currentDirection);
+			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
 		}
-
-		//currentDirection = currentDirection != newDirection ? newDirection : currentDirection;
-		move_and_compute_new_grid(currentDirection);
-		vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
 	}
 }
 
 void move_and_compute_new_grid(enum Direction newDirection){
 
 	if(newDirection == DOWN){
-		// Shift elements up
-		for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-				matrix[i][j] = matrix[i + 1][j];
+		// Check for collision
+		if(matrix[Y_AXIS_CENTER + 1][X_AXIS_CENTER]){
+			gameFinished = true;
+		}else{
+			// Shift elements up
+			for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+					matrix[i][j] = matrix[i + 1][j];
+				}
 			}
-		}
 
-		// Insert new elements
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-			matrix[Y_AXIS_ELEMENTS - 1][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			// Insert new elements
+			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+				matrix[Y_AXIS_ELEMENTS - 1][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			}
 		}
 	}else if(newDirection == UP){
-		// Shift all cells DOWN
-		for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
+
+		// Check for collision
+		if(matrix[Y_AXIS_CENTER - 1][X_AXIS_CENTER]){
+			gameFinished = true;
+		}else{
+			// Shift all cells DOWN
+			for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+					matrix[i][j] = matrix[i - 1][j];
+				}
+			}
+
+			// Insert new elements
 			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-				matrix[i][j] = matrix[i - 1][j];
+				matrix[0][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
 			}
 		}
 
-		// Insert new elements
-		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-			matrix[0][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
-		}
 	}else if(newDirection == LEFT){
-		// Shift all cells RIGHT
 
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-			for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
-				matrix[i][j] = 	matrix[i][j - 1];
+		// Check for collision
+		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER - 1]){
+			gameFinished = true;
+		}else{
+			// Shift all cells RIGHT
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
+					matrix[i][j] = 	matrix[i][j - 1];
+				}
 			}
-		}
 
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-			matrix[i][0] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				matrix[i][0] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			}
 		}
 
 	}else if(newDirection == RIGHT){
-		// Shift all cells LEFT
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-			for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
-				matrix[i][j] = matrix[i][j + 1];
-			}
-		}
 
-		// Insert new elements
-		for(int i = 0; i < X_AXIS_ELEMENTS; i++){
-			matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+		// Check for collision
+		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER + 1]){
+			gameFinished = true;
+		}else{
+			// Shift all cells LEFT
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
+					matrix[i][j] = matrix[i][j + 1];
+				}
+			}
+
+			// Insert new elements
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			}
 		}
 	}
 }
@@ -167,14 +194,8 @@ void computeInitialGrid(){
 		}
 	}
 
-	// Free central blocks
-	int h_middle = Y_AXIS_ELEMENTS / 2;
-	int w_middle = X_AXIS_ELEMENTS / 2;
-
-	matrix[h_middle - 1][w_middle - 1] = false;
-	matrix[h_middle - 1][w_middle] = false;
-	matrix[h_middle][w_middle - 1] = false;
-	matrix[h_middle][w_middle] = false;
+	// Free central block
+	matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS] = false;
 }
 
 int getRandomInt(int max){
@@ -188,39 +209,45 @@ void task_draw_fct( void *pvParameters ){
 	while(!startGame) vTaskDelay(pdMS_TO_TICKS(50));
 
 	while(1){
-		// Draw bricks
-		for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-				if(matrix[i][j]){
-					draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_WHITE);
-				}else{
-					draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_BLACK);
+		if(gameFinished){
+			BSP_LCD_Clear(LCD_COLOR_BLUE);
+			vTaskDelay(pdMS_TO_TICKS(1000));
+		}else{
+			// Draw bricks
+			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
+				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
+					draw_filled_square(
+							j * CUBE_SIDE_LEN,
+							i * CUBE_SIDE_LEN,
+							CUBE_SIDE_LEN,
+							CUBE_SIDE_LEN,
+							matrix[i][j] ? LCD_COLOR_WHITE : LCD_COLOR_BLACK
+					);
 				}
 			}
+
+			// Draw player
+			draw_filled_square(X_AXIS_CENTER * CUBE_SIDE_LEN, Y_AXIS_CENTER * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_ORANGE);
+
+			if(showInitialDelay){
+				// Wait for 3 seconds
+				vTaskDelay(pdMS_TO_TICKS(2000));
+				showInitialDelay = false;
+			}
+
+			// Delay
+			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
+
+			/*// Enhance speed
+			if(difficultyLevel == LOW){
+				speed += 0.01;
+			}else if(difficultyLevel == MEDIUM){
+				speed += 0.02;
+			}else if(difficultyLevel == HIGH){
+				speed += 0.03;
+			}*/
 		}
-
-		// Draw player
-		draw_filled_square(DISP_X_SIZE / 2 - CUBE_SIDE_LEN / 2, DISP_Y_SIZE / 2 - CUBE_SIDE_LEN / 2, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_ORANGE);
-
-		if(showInitialDelay){
-			// Wait for 3 seconds
-			vTaskDelay(pdMS_TO_TICKS(3000));
-			showInitialDelay = false;
-		}
-
-		// Delay
-		vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
 	}
-
-	// Enhance speed
-	if(difficultyLevel == LOW){
-		speed += 0.01;
-	}else if(difficultyLevel == MEDIUM){
-		speed += 0.02;
-	}else if(difficultyLevel == HIGH){
-		speed += 0.03;
-	}
-
 }
 
 void draw_filled_square(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint32_t color){

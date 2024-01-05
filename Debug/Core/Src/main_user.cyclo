@@ -1,8 +1,8 @@
-../Core/Src/main_user.c:56:6:freeRTOS_user_init	2
-../Core/Src/main_user.c:89:6:task_readJoystick_fct	4
-../Core/Src/main_user.c:109:6:move_and_compute_new_grid	17
-../Core/Src/main_user.c:163:6:computeInitialGrid	3
-../Core/Src/main_user.c:180:5:getRandomInt	1
-../Core/Src/main_user.c:185:6:task_draw_fct	6
-../Core/Src/main_user.c:226:6:draw_filled_square	1
-../Core/Src/main_user.c:231:6:displayWelcomeMessage	1
+../Core/Src/main_user.c:59:6:freeRTOS_user_init	2
+../Core/Src/main_user.c:92:6:task_readJoystick_fct	5
+../Core/Src/main_user.c:113:6:move_and_compute_new_grid	21
+../Core/Src/main_user.c:190:6:computeInitialGrid	3
+../Core/Src/main_user.c:201:5:getRandomInt	1
+../Core/Src/main_user.c:206:6:task_draw_fct	7
+../Core/Src/main_user.c:253:6:draw_filled_square	1
+../Core/Src/main_user.c:258:6:displayWelcomeMessage	1

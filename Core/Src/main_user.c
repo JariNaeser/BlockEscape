@@ -36,6 +36,7 @@
 float speed = 1;
 enum DifficultyLevel difficultyLevel = LOW;
 enum Direction currentDirection;
+int score = 0;
 //struct Node* queue;
 bool matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS];
 int startGame;
@@ -236,6 +237,17 @@ void task_draw_fct( void *pvParameters ){
 				showInitialDelay = false;
 			}
 
+			score++;
+
+			char buffer[14];
+			sprintf(buffer, "Score: %d", score);
+
+			// Draw score
+			BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+			BSP_LCD_SetFont(&Font20);
+			BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE - 20, buffer, LEFT_MODE);
+			BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+
 			// Delay
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
 
@@ -268,12 +280,16 @@ void displayWelcomeMessage(){
 
 void displayGameEndMessage(){
 
-	vTaskDelay(pdMS_TO_TICKS(1000));
+	vTaskDelay(pdMS_TO_TICKS(500));
 
 	BSP_LCD_Clear(LCD_COLOR_BLACK);
 	BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
 	BSP_LCD_SetFont(&Font24);
-	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 - 20, "You lost! Your score was: TBD", CENTER_MODE);
+
+	char buffer[32];
+	sprintf(buffer, "You lost! Your score was: %d", score);
+
+	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 - 20, buffer, CENTER_MODE);
 	BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 	BSP_LCD_SetFont(&Font20);
 	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 + 20, "To start a new game press the [user] button", CENTER_MODE);
@@ -285,6 +301,7 @@ void displayGameEndMessage(){
 	currentDirection = UP;
 	showInitialDelay = true;
 	gameFinished = false;
+	score = 0;
 
 	// Fill initial grid
 	computeInitialGrid();

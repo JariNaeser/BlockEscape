@@ -90,16 +90,15 @@ void freeRTOS_user_init(void){
 }
 
 void task_readJoystick_fct( void *pvParameters ){
-	// Wait until game gets started
-	while(!startGame) vTaskDelay(pdMS_TO_TICKS(50));
-
-	// Wait until initial delay is over
-	while(showInitialDelay) vTaskDelay(pdMS_TO_TICKS(10));
 
 	while(1){
-		if(gameFinished){
-			vTaskDelay(pdMS_TO_TICKS(1000));
-		}else{
+		// Wait until game gets started
+		while(!startGame) vTaskDelay(pdMS_TO_TICKS(50));
+
+		// Wait until initial delay is over
+		while(showInitialDelay) vTaskDelay(pdMS_TO_TICKS(10));
+
+		while(!gameFinished){
 			enum Direction newDirection = readJoystick();
 
 			if(newDirection != IDLE) currentDirection = newDirection;
@@ -107,7 +106,10 @@ void task_readJoystick_fct( void *pvParameters ){
 			move_and_compute_new_grid(currentDirection);
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
 		}
+
+		vTaskDelay(pdMS_TO_TICKS(200));
 	}
+
 }
 
 void move_and_compute_new_grid(enum Direction newDirection){
@@ -210,8 +212,7 @@ void task_draw_fct( void *pvParameters ){
 
 	while(1){
 		if(gameFinished){
-			BSP_LCD_Clear(LCD_COLOR_BLUE);
-			vTaskDelay(pdMS_TO_TICKS(1000));
+			displayGameEndMessage();
 		}else{
 			// Draw bricks
 			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
@@ -238,14 +239,14 @@ void task_draw_fct( void *pvParameters ){
 			// Delay
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
 
-			/*// Enhance speed
+			// Enhance speed
 			if(difficultyLevel == LOW){
 				speed += 0.01;
 			}else if(difficultyLevel == MEDIUM){
 				speed += 0.02;
 			}else if(difficultyLevel == HIGH){
 				speed += 0.03;
-			}*/
+			}
 		}
 	}
 }
@@ -263,4 +264,32 @@ void displayWelcomeMessage(){
 	BSP_LCD_SetFont(&Font20);
 	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 + 20, "To start a new game press the [user] button", CENTER_MODE);
 	BSP_LCD_SetFont(&Font24);
+}
+
+void displayGameEndMessage(){
+
+	vTaskDelay(pdMS_TO_TICKS(1000));
+
+	BSP_LCD_Clear(LCD_COLOR_BLACK);
+	BSP_LCD_SetTextColor(LCD_COLOR_ORANGE);
+	BSP_LCD_SetFont(&Font24);
+	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 - 20, "You lost! Your score was: TBD", CENTER_MODE);
+	BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+	BSP_LCD_SetFont(&Font20);
+	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 + 20, "To start a new game press the [user] button", CENTER_MODE);
+	BSP_LCD_SetFont(&Font24);
+
+	// Reset variables
+	speed = 1;
+	startGame = 0;
+	currentDirection = UP;
+	showInitialDelay = true;
+	gameFinished = false;
+
+	// Fill initial grid
+	computeInitialGrid();
+
+	// Wait until new game gets started
+	while(!startGame) vTaskDelay(pdMS_TO_TICKS(200));
+
 }

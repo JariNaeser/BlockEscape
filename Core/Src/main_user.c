@@ -37,8 +37,7 @@ float speed = 1;
 enum DifficultyLevel difficultyLevel = HIGH;
 enum Direction currentDirection;
 int score = 0;
-//struct Node* queue;
-bool matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS];
+struct Node* queue;
 int startGame;
 bool showInitialDelay = true;
 bool gameFinished = false;
@@ -63,7 +62,7 @@ void freeRTOS_user_init(void){
 	// Setup list
 	currentDirection = UP;
 	startGame = 0;
-	//queue = initQueue();
+	queue = initQueue();
 
 	lcd_mut = xSemaphoreCreateMutex();			//Create mutex (LCD access)
 	if(lcd_mut == NULL)
@@ -105,6 +104,7 @@ void task_readJoystick_fct( void *pvParameters ){
 			if(newDirection != IDLE) currentDirection = newDirection;
 
 			move_and_compute_new_grid(currentDirection);
+
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
 		}
 
@@ -115,76 +115,83 @@ void task_readJoystick_fct( void *pvParameters ){
 
 void move_and_compute_new_grid(enum Direction newDirection){
 
-	if(newDirection == DOWN){
-		// Check for collision
-		if(matrix[Y_AXIS_CENTER + 1][X_AXIS_CENTER]){
-			gameFinished = true;
-		}else{
-			// Shift elements up
-			for(int i = 0; i < Y_AXIS_ELEMENTS - 1; i++){
-				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-					matrix[i][j] = matrix[i + 1][j];
-				}
-			}
+	Node* tmp = queue->next;
 
-			// Insert new elements
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-				matrix[Y_AXIS_ELEMENTS - 1][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+	while(tmp != NULL){
+		Node* next = tmp->next;
+
+		if(newDirection == DOWN){
+			// Remove blocks
+			if(tmp->x == X_AXIS_CENTER && tmp->y == Y_AXIS_CENTER + 1){
+				gameFinished = true;
+				return;
+			}else if(tmp->y == 0){
+				removeNode(tmp);
+			}else{
+				// Move blocks
+				tmp->y -= 1;
+			}
+		}else if(newDirection == UP){
+			// Remove blocks
+			if(tmp->x == X_AXIS_CENTER && tmp->y == Y_AXIS_CENTER - 1){
+				gameFinished = true;
+				return;
+			}else if(tmp->y == X_AXIS_ELEMENTS - 1){
+				removeNode(tmp);
+			}else{
+				// Move blocks
+				tmp->y += 1;
+			}
+		}else if(newDirection == LEFT){
+			// Remove blocks
+			if(tmp->x == X_AXIS_CENTER - 1 && tmp->y == Y_AXIS_CENTER){
+				gameFinished = true;
+				return;
+			}else if(tmp->x == X_AXIS_ELEMENTS - 1){
+				removeNode(tmp);
+			}else{
+				// Move blocks
+				tmp->x += 1;
+			}
+		}else if(newDirection == RIGHT){
+			// Remove blocks
+			if(tmp->x == X_AXIS_CENTER + 1 && tmp->y == Y_AXIS_CENTER){
+				gameFinished = true;
+				return;
+			}else if(tmp->x == 0){
+				removeNode(tmp);
+			}else{
+				// Move blocks
+				tmp->x -= 1;
+			}
+		}
+
+		tmp = next;
+	}
+
+	// Generate new blocks
+	if(newDirection == DOWN){
+		for(int x = 0; x < X_AXIS_ELEMENTS; x++){
+			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+				addNode(queue, createNode(true, x, Y_AXIS_ELEMENTS - 1));
 			}
 		}
 	}else if(newDirection == UP){
-
-		// Check for collision
-		if(matrix[Y_AXIS_CENTER - 1][X_AXIS_CENTER]){
-			gameFinished = true;
-		}else{
-			// Shift all cells DOWN
-			for(int i = Y_AXIS_ELEMENTS - 1; i > 0; i--){
-				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-					matrix[i][j] = matrix[i - 1][j];
-				}
-			}
-
-			// Insert new elements
-			for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-				matrix[0][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+		for(int x = 0; x < X_AXIS_ELEMENTS; x++){
+			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+				addNode(queue, createNode(true, x, 0));
 			}
 		}
-
 	}else if(newDirection == LEFT){
-
-		// Check for collision
-		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER - 1]){
-			gameFinished = true;
-		}else{
-			// Shift all cells RIGHT
-			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-				for(int j = X_AXIS_ELEMENTS - 1; j > 0; j--){
-					matrix[i][j] = 	matrix[i][j - 1];
-				}
-			}
-
-			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-				matrix[i][0] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+		for(int y = 0; y < X_AXIS_ELEMENTS; y++){
+			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+				addNode(queue, createNode(true, 0, y));
 			}
 		}
-
 	}else if(newDirection == RIGHT){
-
-		// Check for collision
-		if(matrix[Y_AXIS_CENTER][X_AXIS_CENTER + 1]){
-			gameFinished = true;
-		}else{
-			// Shift all cells LEFT
-			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-				for(int j = 0; j < X_AXIS_ELEMENTS - 1; j++){
-					matrix[i][j] = matrix[i][j + 1];
-				}
-			}
-
-			// Insert new elements
-			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-				matrix[i][X_AXIS_ELEMENTS - 1] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+		for(int y = 0; y < X_AXIS_ELEMENTS; y++){
+			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+				addNode(queue, createNode(true, X_AXIS_ELEMENTS - 1, y));
 			}
 		}
 	}
@@ -193,12 +200,23 @@ void move_and_compute_new_grid(enum Direction newDirection){
 void computeInitialGrid(){
 	for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
 		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-			matrix[i][j] = getRandomInt(100) <= SPAWN_PERCENTAGE;
+			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+				// Add new node
+				addNode(queue, createNode(true, j, i));
+			}
 		}
 	}
 
 	// Free central block
-	matrix[Y_AXIS_ELEMENTS][X_AXIS_ELEMENTS] = false;
+	Node* tmp = queue->next;
+
+	while(tmp != NULL){
+		if(tmp->x == X_AXIS_ELEMENTS && tmp->y == Y_AXIS_ELEMENTS){
+			// Remove node
+			removeNode(tmp);
+		}
+		tmp = tmp->next;
+	}
 }
 
 int getRandomInt(int max){
@@ -219,10 +237,15 @@ void task_draw_fct( void *pvParameters ){
 			BSP_LCD_Clear(LCD_COLOR_BLACK);
 
 			// Draw bricks
-			for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
-				for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-					if(matrix[i][j]) draw_filled_square(j * CUBE_SIDE_LEN, i * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_WHITE);
+			Node* tmp = queue->next;
+
+			while(tmp != NULL){
+
+				if(tmp->isPixel){
+					draw_filled_square(tmp->x * CUBE_SIDE_LEN, tmp->y * CUBE_SIDE_LEN, CUBE_SIDE_LEN, CUBE_SIDE_LEN, LCD_COLOR_WHITE);
 				}
+
+				tmp = tmp->next;
 			}
 
 			// Draw player
@@ -297,6 +320,17 @@ void displayGameEndMessage(){
 	showInitialDelay = true;
 	gameFinished = false;
 	score = 0;
+
+	// Empty queue
+	Node* tmp = queue->next;
+
+	while(tmp != NULL){
+		Node* next = tmp->next;
+		removeNode(tmp);
+		tmp = next;
+	}
+
+	queue->next = NULL;
 
 	// Fill initial grid
 	computeInitialGrid();

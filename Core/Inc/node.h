@@ -10,16 +10,19 @@
 
 #include <stdbool.h>
 
-typedef struct node {
+struct Node;
+
+typedef struct Node {
 	bool isPixel;
 	unsigned int x;
 	unsigned int y;
-	struct node* previous;
-	struct node* next;
+	struct Node* previous;
+	struct Node* next;
 } Node;
 
 Node* initQueue();
 void addNode(Node* queueRoot, Node* newNode);
 void removeNode(Node* nodeToRemove);
+Node* createNode(bool, int, int);
 
 #endif /* INC_NODE_H_ */

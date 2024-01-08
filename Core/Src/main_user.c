@@ -42,11 +42,9 @@ int startGame;
 bool showInitialDelay = true;
 bool gameFinished = false;
 
-static TaskHandle_t task_draw_handle;		//Touchscreen Task Handle
-static TaskHandle_t task_readJoystick_handle;		//Touchscreen Task Handle
-static SemaphoreHandle_t lcd_mut;			//Mutex to access Display
-											// /!\In this case with only one
-											//    task is useless.
+static TaskHandle_t task_draw_handle;
+static TaskHandle_t task_readJoystick_handle;
+static SemaphoreHandle_t lcd_mut;
 
 
 /* Private function prototypes -----------------------------------------------*/
@@ -68,19 +66,8 @@ void freeRTOS_user_init(void){
 	if(lcd_mut == NULL)
 		retval = false;
 
-	retval &= xTaskCreate( task_draw_fct,		//Task function
-				"Task draw",					//Task function comment
-				256,							//Task stack dimension (1kB)
-				NULL,							//Task parameter
-				1,								//Task priority
-				&task_draw_handle );			//Task handle
-
-	retval &= xTaskCreate( task_readJoystick_fct,		//Task function
-				"Task read joystick",					//Task function comment
-				256,									//Task stack dimension (1kB)
-				NULL,									//Task parameter
-				1,										//Task priority
-				&task_readJoystick_handle );			//Task handle
+	retval &= xTaskCreate(task_draw_fct, "Task draw", 256, NULL, 2, &task_draw_handle); // Lower priority
+	retval &= xTaskCreate(task_readJoystick_fct, "Task read joystick", 256, NULL, 1, &task_readJoystick_handle); // Higher priority
 
 	// Fill initial grid
 	computeInitialGrid();

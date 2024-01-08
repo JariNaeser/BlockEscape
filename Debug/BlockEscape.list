@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .comment      00000043  00000000  00000000  000200ba  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00029de5  00000000  00000000  000200fd  2**0
+ 13 .debug_info   00029dd7  00000000  00000000  000200fd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000063f8  00000000  00000000  00049ee2  2**0
+ 14 .debug_abbrev 0000640e  00000000  00000000  00049ed4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00002188  00000000  00000000  000502e0  2**3
+ 15 .debug_aranges 00002188  00000000  00000000  000502e8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00001990  00000000  00000000  00052468  2**0
+ 16 .debug_rnglists 00001990  00000000  00000000  00052470  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0003699a  00000000  00000000  00053df8  2**0
+ 17 .debug_macro  0003699a  00000000  00000000  00053e00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0002cba0  00000000  00000000  0008a792  2**0
+ 18 .debug_line   0002cb9d  00000000  00000000  0008a79a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    0013531f  00000000  00000000  000b7332  2**0
+ 19 .debug_str    0013531f  00000000  00000000  000b7337  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000094b8  00000000  00000000  001ec654  2**2
+ 20 .debug_frame  000094b8  00000000  00000000  001ec658  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000069  00000000  00000000  001f5b0c  2**0
+ 21 .debug_line_str 00000069  00000000  00000000  001f5b10  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -6607,10 +6607,10 @@ void freeRTOS_user_init(void){
  8002af8:	2300      	movs	r3, #0
  8002afa:	71fb      	strb	r3, [r7, #7]
 
-	retval &= xTaskCreate( task_draw_fct,		//Task function
+	retval &= xTaskCreate(task_draw_fct, "Task draw", 256, NULL, 2, &task_draw_handle); // Lower priority
  8002afc:	4b1a      	ldr	r3, [pc, #104]	; (8002b68 <freeRTOS_user_init+0xa4>)
  8002afe:	9301      	str	r3, [sp, #4]
- 8002b00:	2301      	movs	r3, #1
+ 8002b00:	2302      	movs	r3, #2
  8002b02:	9300      	str	r3, [sp, #0]
  8002b04:	2300      	movs	r3, #0
  8002b06:	f44f 7280 	mov.w	r2, #256	; 0x100
@@ -6625,12 +6625,7 @@ void freeRTOS_user_init(void){
  8002b1c:	2301      	movne	r3, #1
  8002b1e:	2300      	moveq	r3, #0
  8002b20:	71fb      	strb	r3, [r7, #7]
-				256,							//Task stack dimension (1kB)
-				NULL,							//Task parameter
-				1,								//Task priority
-				&task_draw_handle );			//Task handle
-
-	retval &= xTaskCreate( task_readJoystick_fct,		//Task function
+	retval &= xTaskCreate(task_readJoystick_fct, "Task read joystick", 256, NULL, 1, &task_readJoystick_handle); // Higher priority
  8002b22:	4b14      	ldr	r3, [pc, #80]	; (8002b74 <freeRTOS_user_init+0xb0>)
  8002b24:	9301      	str	r3, [sp, #4]
  8002b26:	2301      	movs	r3, #1
@@ -6648,9 +6643,6 @@ void freeRTOS_user_init(void){
  8002b42:	2301      	movne	r3, #1
  8002b44:	2300      	moveq	r3, #0
  8002b46:	71fb      	strb	r3, [r7, #7]
-				NULL,									//Task parameter
-				1,										//Task priority
-				&task_readJoystick_handle );			//Task handle
 
 	// Fill initial grid
 	computeInitialGrid();
@@ -7077,11 +7069,9 @@ void move_and_compute_new_grid(enum Direction newDirection){
  8002df2:	68fb      	ldr	r3, [r7, #12]
  8002df4:	2b18      	cmp	r3, #24
  8002df6:	dde7      	ble.n	8002dc8 <move_and_compute_new_grid+0x1d0>
-
+			}
 		}
-
-		tmp = tmp->next;
-	}*/
+	}
 }
  8002df8:	3724      	adds	r7, #36	; 0x24
  8002dfa:	46bd      	mov	sp, r7

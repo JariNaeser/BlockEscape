@@ -12,16 +12,27 @@
 #include "node.h"
 #include <stdlib.h>
 
+
+/* PINOUT
+ *
+ * GND:  	Black
+ * 3.3V: 	Red
+ * AN/PA6:	White
+ * AN/PA4:	Blue
+ *
+ */
+
+
 /* Private define ------------------------------------------------------------*/
 #define COLOR_W 	LCD_COLOR_WHITE
 #define COLOR_G 	LCD_COLOR_GRAY
 #define CUBE_SIDE_LEN	32
+#define RANDOM_MAX	1000
 #define DISP_X_SIZE	800
 #define DISP_Y_SIZE	480
 #define X_AXIS_ELEMENTS DISP_X_SIZE / CUBE_SIDE_LEN
 #define Y_AXIS_ELEMENTS DISP_Y_SIZE / CUBE_SIDE_LEN
-#define MOVE_INTERVAL 700
-#define SPAWN_PERCENTAGE 5
+#define MOVE_INTERVAL 150
 #define X_AXIS_CENTER X_AXIS_ELEMENTS / 2
 #define Y_AXIS_CENTER Y_AXIS_ELEMENTS / 2
 
@@ -33,9 +44,9 @@
 
 /* Private variables ---------------------------------------------------------*/
 
-float speed = 1;
-enum DifficultyLevel difficultyLevel = HIGH;
+int moveInterval;
 enum Direction currentDirection;
+float spawnPercentage = 50;
 int score = 0;
 struct Node* queue;
 int startGame;
@@ -95,7 +106,7 @@ void task_readJoystick_fct( void *pvParameters ){
 			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
 		}
 
-		vTaskDelay(pdMS_TO_TICKS(200));
+		vTaskDelay(pdMS_TO_TICKS(100));
 	}
 
 }
@@ -159,25 +170,25 @@ void move_and_compute_new_grid(enum Direction newDirection){
 	// Generate new blocks
 	if(newDirection == DOWN){
 		for(int x = 0; x < X_AXIS_ELEMENTS; x++){
-			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+			if(getRandomInt(RANDOM_MAX) <= spawnPercentage){
 				addNode(queue, createNode(true, x, Y_AXIS_ELEMENTS - 1));
 			}
 		}
 	}else if(newDirection == UP){
 		for(int x = 0; x < X_AXIS_ELEMENTS; x++){
-			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+			if(getRandomInt(RANDOM_MAX) <= spawnPercentage){
 				addNode(queue, createNode(true, x, 0));
 			}
 		}
 	}else if(newDirection == LEFT){
 		for(int y = 0; y < X_AXIS_ELEMENTS; y++){
-			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+			if(getRandomInt(RANDOM_MAX) <= spawnPercentage){
 				addNode(queue, createNode(true, 0, y));
 			}
 		}
 	}else if(newDirection == RIGHT){
 		for(int y = 0; y < X_AXIS_ELEMENTS; y++){
-			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+			if(getRandomInt(RANDOM_MAX) <= spawnPercentage){
 				addNode(queue, createNode(true, X_AXIS_ELEMENTS - 1, y));
 			}
 		}
@@ -187,7 +198,7 @@ void move_and_compute_new_grid(enum Direction newDirection){
 void computeInitialGrid(){
 	for(int i = 0; i < Y_AXIS_ELEMENTS; i++){
 		for(int j = 0; j < X_AXIS_ELEMENTS; j++){
-			if(getRandomInt(100) <= SPAWN_PERCENTAGE){
+			if(getRandomInt(RANDOM_MAX) <= spawnPercentage){
 				// Add new node
 				addNode(queue, createNode(true, j, i));
 			}
@@ -240,7 +251,7 @@ void task_draw_fct( void *pvParameters ){
 
 			if(showInitialDelay){
 				// Wait for 3 seconds
-				vTaskDelay(pdMS_TO_TICKS(2000));
+				vTaskDelay(pdMS_TO_TICKS(1000));
 				showInitialDelay = false;
 			}
 
@@ -256,14 +267,8 @@ void task_draw_fct( void *pvParameters ){
 			BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 
 			// Delay
-			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL/speed));
-
-			// Enhance speed
-			if(difficultyLevel == MEDIUM){
-				speed += 0.03;
-			}else if(difficultyLevel == HIGH){
-				speed += 0.045;
-			}
+			vTaskDelay(pdMS_TO_TICKS(MOVE_INTERVAL));
+			spawnPercentage += 0.5;
 		}
 	}
 }
@@ -300,8 +305,8 @@ void displayGameEndMessage(){
 	BSP_LCD_DisplayStringAt(0, DISP_Y_SIZE / 2 + 20, "To start a new game press the [user] button", CENTER_MODE);
 	BSP_LCD_SetFont(&Font24);
 
-	// Reset variables
-	speed = 1;
+	// Reset variabless
+	spawnPercentage = 50;
 	startGame = 0;
 	currentDirection = UP;
 	showInitialDelay = true;

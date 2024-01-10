@@ -7,7 +7,7 @@
 Per poter utilizzare questo sistema è necessario disporre dei seguenti componenti:
 
 * 1x Scheda STM32F769I-DISCO
-* 1x Joystick 
+* 1x Thumb Joystick 
 * 4x Cavi femmina-maschio
 
 ## Collegamento delle periferiche
@@ -27,3 +27,10 @@ Il codice sorgente compreso nel progetto è stato fornito assieme alla consegna 
 1. Se il programma non è ancora stato caricato sulla board farlo tramite il progetto allegato e il software STM32CubeIDE
 2. Premere il bottone "user" per cominciare una nuova partita
 3. Giocare muovendo il blocchetto centrale tramite il joystick
+
+## Demo
+<video src='https://github.com/JariNaeser/BlockEscape/assets/37137418/4b41b6d1-686f-4809-8320-afd7b281a1b2' width=180/>
+
+
+
+
